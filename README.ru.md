@@ -7,6 +7,7 @@
 ![Platform](https://img.shields.io/badge/platform-Android-3DDC84)
 ![minSdk](https://img.shields.io/badge/minSdk-26-blue)
 ![Kotlin](https://img.shields.io/badge/Kotlin-2.2.10-7F52FF)
+![Languages](https://img.shields.io/badge/languages-EN%20%7C%20RU%20%7C%20DE-blueviolet)
 
 Android-приложение, которое анализирует локальные или склонированные с GitHub репозитории,
 строит глубокое архитектурное понимание кодовой базы и формирует интерактивный сворачиваемый
@@ -31,6 +32,8 @@ HTML-отчёт с мульти-LLM оценкой качества и безо�
   | Ollama Cloud | `https://ollama.com/v1` | API-ключ / OAuth |
   | OpenCode Zen | `https://opencode.ai/zen/v1` | Бесплатная модель по умолчанию |
   | OpenCode Go | `https://opencode.ai/zen/go/v1` | Своя модель |
+- **Управление провайдерами.** Добавление, дублирование, редактирование и удаление своих
+  OpenAI-совместимых эндпоинтов; ключи хранятся в зашифрованном виде, у каждого есть «Проверить соединение».
 - **Express-отчёт (ансамбль).** Прогоняет один и тот же код по очереди через все настроенные
   провайдеры, делает отдельный отчёт по каждой модели, затем сравнивает вердикты в **общий
   супер-отчёт** (голосование большинством, эскалация к самой строгой оценке, пометка «disputed»).
@@ -67,6 +70,13 @@ HTML-отчёт с мульти-LLM оценкой качества и безо�
 - Android SDK Platform 37 и Build-Tools 37 для сборки.
 - JDK 17.
 - AGP 9.1.1 со встроенным Kotlin (Kotlin 2.2.10), Gradle 9.3.1, Jetpack Compose Material 3.
+- androidx.appcompat 1.8.0 (переключение языка приложения).
+
+## Загрузка (CI)
+
+Каждый пуш в `main` собирает debug APK через GitHub Actions. Откройте последний
+[запуск workflow](https://github.com/sashok53011/scm-analyzer/actions/workflows/android.yml)
+и скачайте артефакт `scm-analyzer-debug-apk`.
 
 ## Сборка и установка
 

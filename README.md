@@ -7,6 +7,7 @@
 ![Platform](https://img.shields.io/badge/platform-Android-3DDC84)
 ![minSdk](https://img.shields.io/badge/minSdk-26-blue)
 ![Kotlin](https://img.shields.io/badge/Kotlin-2.2.10-7F52FF)
+![Languages](https://img.shields.io/badge/languages-EN%20%7C%20RU%20%7C%20DE-blueviolet)
 
 An Android app that analyzes local or GitHub-cloned repositories, builds a deep architectural
 understanding of the codebase, and renders an interactive, collapsible HTML report with
@@ -31,6 +32,8 @@ multi-LLM security and quality review.
   | Ollama Cloud | `https://ollama.com/v1` | API key / OAuth |
   | OpenCode Zen | `https://opencode.ai/zen/v1` | Default free model |
   | OpenCode Go | `https://opencode.ai/zen/go/v1` | Custom model |
+- **Provider management.** Add, duplicate, edit and delete custom OpenAI-compatible endpoints;
+  API keys are stored encrypted and every provider has a "Test connection" check.
 - **Express report (ensemble).** Runs the same code through every configured provider in turn,
   produces one report per model, then compares all verdicts into a **consensus super-report**
   (majority vote, escalation to the most severe verdict, "disputed" flags).
@@ -67,6 +70,13 @@ Ingest ─▶ Filter ─▶ Language detect ─▶ Parse symbols ─▶ Map ever
 - Android SDK Platform 37 & Build-Tools 37 for building.
 - JDK 17.
 - AGP 9.1.1 with built-in Kotlin (Kotlin 2.2.10), Gradle 9.3.1, Jetpack Compose Material 3.
+- androidx.appcompat 1.8.0 (per-app language switching).
+
+## Download (CI)
+
+Every push to `main` builds a debug APK with GitHub Actions. Open the latest
+[workflow run](https://github.com/sashok53011/scm-analyzer/actions/workflows/android.yml)
+and download the `scm-analyzer-debug-apk` artifact.
 
 ## Build & install
 
