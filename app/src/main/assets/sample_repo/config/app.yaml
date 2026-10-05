@@ -1,0 +1,9 @@
+app:
+  name: sample
+  port: 8080
+database:
+  host: localhost
+  user: admin
+  password: hunter2
+logging:
+  level: debug
