@@ -71,18 +71,18 @@
 </head>
 <body>
 <header class="topbar">
-  <div class="brand">SCM Analyzer <small>super-report</small></div>
+  <div class="brand">SCM Analyzer <small>{{t.subtitle}}</small></div>
   <div class="actions">
-    <input id="search" type="search" placeholder="Search code, names, files…" autocomplete="off">
-    <select id="badgeFilter"><option value="">All verdicts</option>
-      <option value="VULNERABILITY">🛡️ Vulnerability</option>
-      <option value="WARNING">⚠️ Warning</option>
-      <option value="PASS">✅ Passed</option>
-      <option value="INFO">ℹ️ Info</option></select>
-    <label class="chk"><input type="checkbox" id="disputedOnly"> Disputed only</label>
-    <label class="chk"><input type="checkbox" id="hideBlank" checked> Hide blank</label>
-    <button id="expandAll" type="button">Expand all</button>
-    <button id="collapseAll" type="button">Collapse all</button>
+    <input id="search" type="search" placeholder="{{t.search}}" autocomplete="off">
+    <select id="badgeFilter"><option value="">{{t.allVerdicts}}</option>
+      <option value="VULNERABILITY">🛡️ {{t.badgeVuln}}</option>
+      <option value="WARNING">⚠️ {{t.badgeWarn}}</option>
+      <option value="PASS">✅ {{t.badgePass}}</option>
+      <option value="INFO">ℹ️ {{t.badgeInfo}}</option></select>
+    <label class="chk"><input type="checkbox" id="disputedOnly"> {{t.disputedOnly}}</label>
+    <label class="chk"><input type="checkbox" id="hideBlank" checked> {{t.hideBlank}}</label>
+    <button id="expandAll" type="button">{{t.expandAll}}</button>
+    <button id="collapseAll" type="button">{{t.collapseAll}}</button>
     <button id="themeToggle" type="button">🌗</button>
   </div>
 </header>
@@ -105,6 +105,7 @@
   var disputedOnly = document.getElementById('disputedOnly');
   var hideBlank = document.getElementById('hideBlank');
   var count = document.getElementById('count');
+  var ROWS_WORD = '{{t.rowsWord}}';
   function apply() {
     var q=(search.value||'').trim().toLowerCase(), b=badge.value, d=disputedOnly.checked, hb=hideBlank.checked, v=0;
     rows.forEach(function(r){
@@ -112,7 +113,7 @@
              (!d||r.dataset.disputed==='1')&&(!(hb&&r.dataset.kind==='blank'));
       r.hidden=!ok; if(ok)v++;
     });
-    count.textContent=v+' / '+rows.length+' rows';
+    count.textContent=v+' / '+rows.length+' '+ROWS_WORD;
   }
   search.addEventListener('input',apply); badge.addEventListener('change',apply);
   disputedOnly.addEventListener('change',apply); hideBlank.addEventListener('change',apply);

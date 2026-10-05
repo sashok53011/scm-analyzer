@@ -41,6 +41,8 @@ multi-LLM security and quality review.
   - Verdict badges: ✅ best practice · ⚠️ warning · 🛡️ vulnerability · ℹ️ info.
   - Instant search, kind/verdict filters, dark/light theme, expand/collapse all.
   - Export to storage, share, or open in a browser.
+- **Localized interface** in English, Russian and German, with an in-app language switcher;
+  the HTML report and the LLM verdicts follow the selected language.
 
 ## How it works
 

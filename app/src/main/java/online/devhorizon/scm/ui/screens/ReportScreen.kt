@@ -31,9 +31,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
+import online.devhorizon.scm.R
 import online.devhorizon.scm.report.ReportStorage
 import online.devhorizon.scm.ui.AnalysisUi
 import online.devhorizon.scm.ui.MainViewModel
@@ -49,9 +51,9 @@ fun ReportScreen(vm: MainViewModel, onBack: () -> Unit) {
     val storage = remember { ReportStorage(context) }
 
     val tabs: List<ReportTab> = when (val a = analysis) {
-        is AnalysisUi.Done -> listOf(ReportTab("Report", a.reportFile))
+        is AnalysisUi.Done -> listOf(ReportTab(stringResource(R.string.report_tab_default), a.reportFile))
         is AnalysisUi.ExpressDone -> buildList {
-            add(ReportTab("Super-report", a.superFile))
+            add(ReportTab(stringResource(R.string.report_tab_super), a.superFile))
             a.reports.forEach { add(ReportTab(it.provider.label, it.file)) }
         }
         else -> emptyList()
@@ -66,10 +68,10 @@ fun ReportScreen(vm: MainViewModel, onBack: () -> Unit) {
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
-                title = { Text("Report") },
+                title = { Text(stringResource(R.string.report_title)) },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(R.string.cd_back))
                     }
                 },
                 actions = {
@@ -80,7 +82,7 @@ fun ReportScreen(vm: MainViewModel, onBack: () -> Unit) {
                                 runCatching { context.startActivity(storage.shareIntent(storage.exportCopy(it.file))) }
                             }
                         },
-                    ) { Icon(Icons.Filled.Share, contentDescription = "Share") }
+                    ) { Icon(Icons.Filled.Share, contentDescription = stringResource(R.string.cd_share)) }
                     IconButton(
                         enabled = active != null,
                         onClick = {
@@ -88,7 +90,7 @@ fun ReportScreen(vm: MainViewModel, onBack: () -> Unit) {
                                 runCatching { context.startActivity(storage.viewIntent(storage.exportCopy(it.file))) }
                             }
                         },
-                    ) { Icon(Icons.Filled.OpenInNew, contentDescription = "Open in browser") }
+                    ) { Icon(Icons.Filled.OpenInNew, contentDescription = stringResource(R.string.cd_open_browser)) }
                 },
             )
         },
@@ -121,8 +123,8 @@ fun ReportScreen(vm: MainViewModel, onBack: () -> Unit) {
                     modifier = Modifier.fillMaxSize().padding(16.dp),
                     verticalArrangement = Arrangement.spacedBy(8.dp),
                 ) {
-                    Text("No report yet.", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
-                    Text("Run an analysis to generate the interactive HTML report.", color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    Text(stringResource(R.string.report_none_title), style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
+                    Text(stringResource(R.string.report_none_body), color = MaterialTheme.colorScheme.onSurfaceVariant)
                 }
             } else {
                 AndroidView(

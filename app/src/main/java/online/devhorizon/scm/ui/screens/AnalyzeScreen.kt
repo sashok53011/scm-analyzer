@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -35,10 +34,14 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import online.devhorizon.scm.R
+import online.devhorizon.scm.domain.model.Badge
 import online.devhorizon.scm.ui.AnalysisUi
 import online.devhorizon.scm.ui.MainViewModel
+import java.util.Locale
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -63,10 +66,10 @@ fun AnalyzeScreen(
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
-                title = { Text("Analyze") },
+                title = { Text(stringResource(R.string.analyze_title)) },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(R.string.cd_back))
                     }
                 },
             )
@@ -82,7 +85,7 @@ fun AnalyzeScreen(
         ) {
             val repo = pending
             if (repo == null) {
-                Text("No repository selected.", color = MaterialTheme.colorScheme.onSurfaceVariant)
+                Text(stringResource(R.string.analyze_no_repo), color = MaterialTheme.colorScheme.onSurfaceVariant)
                 return@Column
             }
 
@@ -91,35 +94,43 @@ fun AnalyzeScreen(
                     headlineContent = { Text(repo.source.displayName, fontWeight = FontWeight.SemiBold) },
                     supportingContent = {
                         Text(
-                            "${repo.kind} · ${repo.fileCount} files · " +
-                                "%.1f MB".format(repo.totalBytes / (1024.0 * 1024.0)),
+                            stringResource(
+                                R.string.analyze_repo_meta,
+                                repo.kind,
+                                repo.fileCount,
+                                String.format(Locale.US, "%.1f", repo.totalBytes / (1024.0 * 1024.0)),
+                            )
                         )
                     },
                 )
             }
 
-            Text("Options", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
+            Text(
+                stringResource(R.string.analyze_options),
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.SemiBold,
+            )
             Card(modifier = Modifier.fillMaxWidth()) {
                 Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
                     Row {
-                        Text("LLM review", modifier = Modifier.weight(1f), fontWeight = FontWeight.Medium)
+                        Text(stringResource(R.string.analyze_llm_review), modifier = Modifier.weight(1f), fontWeight = FontWeight.Medium)
                         Switch(checked = useLlm, onCheckedChange = { useLlm = it }, enabled = !running)
                     }
                     if (useLlm) {
                         Text(
-                            "Provider: ${provider.label} · ${provider.model}",
+                            stringResource(R.string.analyze_provider_line, provider.label, provider.model),
                             style = MaterialTheme.typography.bodySmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
                         )
                         if (!provider.isReady) {
                             Text(
-                                "Provider not configured (missing API key). Configure it on the Providers screen.",
+                                stringResource(R.string.analyze_provider_missing),
                                 style = MaterialTheme.typography.bodySmall,
                                 color = MaterialTheme.colorScheme.error,
                             )
                         }
                     }
-                    Text("Max files: ${maxFiles.toInt()}", style = MaterialTheme.typography.bodySmall)
+                    Text(stringResource(R.string.analyze_max_files, maxFiles.toInt()), style = MaterialTheme.typography.bodySmall)
                     Slider(
                         value = maxFiles,
                         onValueChange = { maxFiles = it },
@@ -127,7 +138,7 @@ fun AnalyzeScreen(
                         enabled = !running,
                     )
                     if (useLlm) {
-                        Text("LLM element budget: ${maxLlm.toInt()}", style = MaterialTheme.typography.bodySmall)
+                        Text(stringResource(R.string.analyze_llm_budget, maxLlm.toInt()), style = MaterialTheme.typography.bodySmall)
                         Slider(
                             value = maxLlm,
                             onValueChange = { maxLlm = it },
@@ -143,9 +154,9 @@ fun AnalyzeScreen(
                     onClick = { vm.startAnalysis(useLlm, maxFiles.toInt(), maxLlm.toInt()) },
                     enabled = !running,
                     modifier = Modifier.weight(1f),
-                ) { Text("Run analysis") }
+                ) { Text(stringResource(R.string.analyze_run)) }
                 if (running) {
-                    OutlinedButton(onClick = { vm.cancelAnalysis() }) { Text("Cancel") }
+                    OutlinedButton(onClick = { vm.cancelAnalysis() }) { Text(stringResource(R.string.action_cancel)) }
                 }
             }
 
@@ -154,11 +165,10 @@ fun AnalyzeScreen(
                 enabled = !running,
                 modifier = Modifier.fillMaxWidth(),
             ) {
-                Text("Express report · all providers (${providers.count { it.isReady }})")
+                Text(stringResource(R.string.analyze_express, providers.count { it.isReady }))
             }
             Text(
-                "Express runs the same code through every configured, usable provider one after another, " +
-                    "then merges all verdicts into a consensus super-report.",
+                stringResource(R.string.analyze_express_desc),
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
@@ -167,7 +177,7 @@ fun AnalyzeScreen(
                 is AnalysisUi.Running -> {
                     Card(modifier = Modifier.fillMaxWidth()) {
                         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                            Text("Running…", fontWeight = FontWeight.SemiBold)
+                            Text(stringResource(R.string.analyze_running), fontWeight = FontWeight.SemiBold)
                             if (a.total > 0) {
                                 LinearProgressIndicator(
                                     progress = { (a.done.toFloat() / a.total).coerceIn(0f, 1f) },
@@ -187,22 +197,30 @@ fun AnalyzeScreen(
                 is AnalysisUi.Done -> {
                     Card(modifier = Modifier.fillMaxWidth()) {
                         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                            Text("Analysis complete", fontWeight = FontWeight.SemiBold)
+                            Text(stringResource(R.string.analyze_done_title), fontWeight = FontWeight.SemiBold)
                             val r = a.result
                             Text(
-                                "${r.elements.size} elements · ${r.filesAnalyzed}/${r.filesFound} files · " +
-                                    "line coverage %.1f%%".format(r.lineCoveragePercent()),
+                                stringResource(
+                                    R.string.analyze_done_meta,
+                                    r.elements.size,
+                                    r.filesAnalyzed,
+                                    r.filesFound,
+                                    String.format(Locale.US, "%.1f", r.lineCoveragePercent()),
+                                ),
                                 style = MaterialTheme.typography.bodySmall,
                             )
                             Text(
-                                "Vulnerabilities: ${r.badgeCounts[online.devhorizon.scm.domain.model.Badge.VULNERABILITY] ?: 0} · " +
-                                    "Warnings: ${r.badgeCounts[online.devhorizon.scm.domain.model.Badge.WARNING] ?: 0} · " +
-                                    "Passed: ${r.badgeCounts[online.devhorizon.scm.domain.model.Badge.PASS] ?: 0}",
+                                stringResource(
+                                    R.string.analyze_done_verdicts,
+                                    r.badgeCounts[Badge.VULNERABILITY] ?: 0,
+                                    r.badgeCounts[Badge.WARNING] ?: 0,
+                                    r.badgeCounts[Badge.PASS] ?: 0,
+                                ),
                                 style = MaterialTheme.typography.bodySmall,
                             )
                             Spacer(Modifier.height(4.dp))
                             Button(onClick = onViewReport, modifier = Modifier.fillMaxWidth()) {
-                                Text("View interactive report")
+                                Text(stringResource(R.string.analyze_view_report))
                             }
                         }
                     }
@@ -211,7 +229,7 @@ fun AnalyzeScreen(
                 is AnalysisUi.Failed -> {
                     Card(modifier = Modifier.fillMaxWidth()) {
                         Column(Modifier.padding(16.dp)) {
-                            Text("Failed", fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.error)
+                            Text(stringResource(R.string.analyze_failed), fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.error)
                             Text(a.error, style = MaterialTheme.typography.bodySmall)
                         }
                     }
@@ -220,19 +238,22 @@ fun AnalyzeScreen(
                 is AnalysisUi.ExpressDone -> {
                     Card(modifier = Modifier.fillMaxWidth()) {
                         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                            Text("Express report ready", fontWeight = FontWeight.SemiBold)
+                            Text(stringResource(R.string.analyze_express_done_title), fontWeight = FontWeight.SemiBold)
                             Text(
-                                "${a.reports.size} model report(s) + super-report · ${a.superResult.elements.size} elements",
+                                stringResource(R.string.analyze_express_done_meta, a.reports.size, a.superResult.elements.size),
                                 style = MaterialTheme.typography.bodySmall,
                             )
                             Text(
-                                "Vulnerabilities: ${a.superResult.badgeCounts[online.devhorizon.scm.domain.model.Badge.VULNERABILITY] ?: 0} · " +
-                                    "Warnings: ${a.superResult.badgeCounts[online.devhorizon.scm.domain.model.Badge.WARNING] ?: 0}",
+                                stringResource(
+                                    R.string.analyze_express_done_verdicts,
+                                    a.superResult.badgeCounts[Badge.VULNERABILITY] ?: 0,
+                                    a.superResult.badgeCounts[Badge.WARNING] ?: 0,
+                                ),
                                 style = MaterialTheme.typography.bodySmall,
                             )
                             Spacer(Modifier.height(4.dp))
                             Button(onClick = onViewReport, modifier = Modifier.fillMaxWidth()) {
-                                Text("View super-report")
+                                Text(stringResource(R.string.analyze_view_super))
                             }
                         }
                     }
@@ -242,12 +263,10 @@ fun AnalyzeScreen(
             }
 
             if (log.isNotEmpty()) {
-                Text("Log", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
+                Text(stringResource(R.string.analyze_log), style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
                 Card(modifier = Modifier.fillMaxWidth()) {
                     Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(2.dp)) {
-                        log.takeLast(40).forEach {
-                            Text(it, style = MaterialTheme.typography.bodySmall)
-                        }
+                        log.takeLast(40).forEach { Text(it, style = MaterialTheme.typography.bodySmall) }
                     }
                 }
             }

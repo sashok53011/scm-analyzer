@@ -1,4 +1,282 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">SCM Analyzer</string>
+
+    <!-- Common -->
+    <string name="cd_providers">Providers</string>
+    <string name="cd_language">Language</string>
+    <string name="cd_back">Back</string>
+    <string name="cd_share">Share</string>
+    <string name="cd_open_browser">Open in browser</string>
+    <string name="cd_edit">Edit</string>
+    <string name="cd_duplicate">Duplicate</string>
+    <string name="cd_delete">Delete</string>
+    <string name="action_cancel">Cancel</string>
+    <string name="action_save">Save</string>
+    <string name="action_add">Add</string>
+    <string name="action_reset">Reset</string>
+    <string name="action_change">Change</string>
+
+    <!-- Language -->
+    <string name="language_title">Language</string>
+    <string name="language_system">System default</string>
+
+    <!-- Home -->
+    <string name="home_hero_title">Understand any codebase</string>
+    <string name="home_hero_body">Recursive repository analysis with an interactive, collapsible HTML report and multi-LLM security review.</string>
+    <string name="home_get_started">Get started</string>
+    <string name="home_open_local_title">Open local repository</string>
+    <string name="home_open_local_sub">Pick a folder on the device and analyze it in place.</string>
+    <string name="home_clone_title">Clone from GitHub</string>
+    <string name="home_clone_sub">Download a public repository and analyze the working tree.</string>
+    <string name="home_sample_title">Load bundled sample</string>
+    <string name="home_sample_sub">Try the full pipeline instantly on a small multi-language repo.</string>
+    <string name="home_working">Working…</string>
+    <string name="home_error_title">Something went wrong</string>
+    <string name="home_active_provider">Active provider</string>
+    <string name="home_pipeline">Analysis pipeline</string>
+    <string name="home_step_ingest_title">Ingest</string>
+    <string name="home_step_ingest_body">Local folder (SAF) or GitHub download, with smart binary/vendor filtering.</string>
+    <string name="home_step_parse_title">Parse</string>
+    <string name="home_step_parse_body">Regex/heuristic extractors for Kotlin, Java, JS/TS, Python, C/C++, Go, Rust, C#, PHP, Ruby, Shell and markup.</string>
+    <string name="home_step_map_title">Map</string>
+    <string name="home_step_map_body">Every line of real code is assigned to a row; coverage is reported as N/N.</string>
+    <string name="home_step_assess_title">Assess</string>
+    <string name="home_step_assess_body">Local static rules plus optional LLM review: warning, vulnerability, passed.</string>
+    <string name="home_step_report_title">Report</string>
+    <string name="home_step_report_body">Standalone interactive HTML with 4 columns, search, filters and dark mode.</string>
+    <string name="home_build">Build %1$s</string>
+    <string name="home_device">%1$s %2$s · Android %3$s (API %4$d)</string>
+    <string name="clone_dialog_title">Clone from GitHub</string>
+    <string name="clone_dialog_hint">Enter a public repository URL or owner/repo.</string>
+    <string name="clone_field">Repository</string>
+    <string name="clone_placeholder">owner/repo or https://github.com/owner/repo</string>
+    <string name="clone_action">Clone</string>
+
+    <!-- Analyze -->
+    <string name="analyze_title">Analyze</string>
+    <string name="analyze_no_repo">No repository selected.</string>
+    <string name="analyze_repo_meta">%1$s · %2$d files · %3$s MB</string>
+    <string name="analyze_options">Options</string>
+    <string name="analyze_llm_review">LLM review</string>
+    <string name="analyze_provider_line">Provider: %1$s · %2$s</string>
+    <string name="analyze_provider_missing">Provider not configured (missing API key). Configure it on the Providers screen.</string>
+    <string name="analyze_max_files">Max files: %1$d</string>
+    <string name="analyze_llm_budget">LLM element budget: %1$d</string>
+    <string name="analyze_run">Run analysis</string>
+    <string name="analyze_express">Express report · all providers (%1$d)</string>
+    <string name="analyze_express_desc">Express runs the same code through every configured, usable provider one after another, then merges all verdicts into a consensus super-report.</string>
+    <string name="analyze_running">Running…</string>
+    <string name="analyze_done_title">Analysis complete</string>
+    <string name="analyze_done_meta">%1$d elements · %2$d/%3$d files · code coverage %4$s%%</string>
+    <string name="analyze_done_verdicts">Vulnerabilities: %1$d · Warnings: %2$d · Passed: %3$d</string>
+    <string name="analyze_view_report">View interactive report</string>
+    <string name="analyze_failed">Failed</string>
+    <string name="analyze_express_done_title">Express report ready</string>
+    <string name="analyze_express_done_meta">%1$d model report(s) + super-report · %2$d elements</string>
+    <string name="analyze_express_done_verdicts">Vulnerabilities: %1$d · Warnings: %2$d</string>
+    <string name="analyze_view_super">View super-report</string>
+    <string name="analyze_log">Log</string>
+
+    <!-- Providers -->
+    <string name="providers_title">LLM providers</string>
+    <string name="providers_intro">Select the provider used for LLM review. API keys are stored encrypted on device.</string>
+    <string name="providers_api_key_missing">API key: missing</string>
+    <string name="providers_api_key_set">API key: set</string>
+    <string name="providers_no_key">No API key required</string>
+    <string name="providers_requires_key">Requires API key</string>
+    <string name="field_base_url">Base URL</string>
+    <string name="field_model">Model</string>
+    <string name="field_api_key">API key</string>
+    <string name="providers_test">Test connection</string>
+    <string name="providers_testing">Testing…</string>
+    <string name="providers_test_ok">OK · %1$d models available</string>
+    <string name="providers_test_fail">Failed: %1$s</string>
+    <string name="provider_copy_suffix">%1$s (copy)</string>
+    <string name="provider_default_custom_label">Custom provider</string>
+    <string name="provider_default_custom_note">OpenAI-compatible endpoint.</string>
+    <string name="provider_note_devhorizon">OpenAI-compatible, no API key required.</string>
+    <string name="provider_note_ollama">API key, or OAuth via `ollama signin`.</string>
+    <string name="provider_note_zen">Default free model; API key from OpenCode Zen.</string>
+    <string name="provider_note_go">Custom model selection; API key required.</string>
+
+    <!-- Report screen -->
+    <string name="report_title">Report</string>
+    <string name="report_none_title">No report yet.</string>
+    <string name="report_none_body">Run an analysis to generate the interactive HTML report.</string>
+    <string name="report_tab_default">Report</string>
+    <string name="report_tab_super">Super-report</string>
+
+    <!-- Errors / status shown in UI -->
+    <string name="err_clone_failed">Clone failed: %1$s</string>
+    <string name="err_folder_failed">Cannot open folder: %1$s</string>
+    <string name="err_sample_failed">Sample load failed: %1$s</string>
+    <string name="err_provider_not_configured">Provider \'%1$s\' is not configured (missing key or URL).</string>
+    <string name="err_no_providers">No usable providers. Configure at least one on the Providers screen.</string>
+
+    <!-- Report: builder labels -->
+    <string name="rep_llm_off">LLM review: off (static rules only)</string>
+    <string name="rep_llm_on">LLM: %1$s / %2$s (%3$d reviewed)</string>
+    <string name="rep_llm_ensemble">Ensemble (%1$d models)</string>
+    <string name="rep_stat_files">Files</string>
+    <string name="rep_stat_languages">Languages</string>
+    <string name="rep_stat_elements">Elements</string>
+    <string name="rep_stat_code_lines">Code lines</string>
+    <string name="rep_stat_vulnerabilities">Vulnerabilities</string>
+    <string name="rep_stat_warnings">Warnings</string>
+    <string name="rep_stat_passed">Passed</string>
+    <string name="rep_stat_models">Models</string>
+    <string name="rep_stat_agreed">Agreed</string>
+    <string name="rep_stat_disputed">Disputed</string>
+    <string name="rep_coverage_code">Real code coverage (executable lines mapped to rows)</string>
+    <string name="rep_coverage_symbol">Symbol coverage (lines inside detected symbols)</string>
+    <string name="rep_footer_files">%1$d/%2$d files analyzed</string>
+    <string name="rep_footer_no_warnings">no warnings</string>
+    <string name="rep_footer_warnings">%1$d warnings</string>
+    <string name="rep_generated_by">Generated by SCM Analyzer</string>
+    <string name="rep_static_rules">Static rules</string>
+    <string name="rep_not_assessed">not assessed by this model</string>
+    <string name="consensus_none">Not reviewed by any model.</string>
+    <string name="consensus_agree">All %1$d model(s) agree: %2$s.</string>
+    <string name="consensus_disagree">Models disagree (%1$s) — escalated to %2$s.</string>
+
+    <!-- Report template chrome -->
+    <string name="t_report_subtitle">report</string>
+    <string name="t_super_subtitle">super-report</string>
+    <string name="t_search">Search code, names, files…</string>
+    <string name="t_all_kinds">All kinds</string>
+    <string name="t_all_verdicts">All verdicts</string>
+    <string name="t_hide_blank">Hide blank</string>
+    <string name="t_disputed_only">Disputed only</string>
+    <string name="t_expand_all">Expand all</string>
+    <string name="t_collapse_all">Collapse all</string>
+    <string name="t_badge_vuln">Vulnerability</string>
+    <string name="t_badge_warn">Warning</string>
+    <string name="t_badge_pass">Passed</string>
+    <string name="t_badge_info">Info</string>
+    <string name="t_col_name">Name / Description</string>
+    <string name="t_col_category">Category / Technology / Type</string>
+    <string name="t_col_code">Exact code &amp; line reference</string>
+    <string name="t_col_quality">Code quality &amp; security</string>
+    <string name="t_col_consensus">Consensus / quality</string>
+    <string name="t_model_verdicts">Model verdicts (%1$d)</string>
+    <string name="t_legend_pass">Best practice</string>
+    <string name="t_legend_warn">Problem / warning</string>
+    <string name="t_legend_vuln">Vulnerability</string>
+    <string name="t_legend_info">Info</string>
+    <string name="t_tip">Tip: any block wider than ¼ of the screen auto-collapses — tap it to expand.</string>
+    <string name="t_disputed_badge">disputed</string>
+    <string name="t_rows_counter">%1$d / %2$d rows</string>
+    <string name="t_rows_word">rows</string>
+
+    <!-- Kinds -->
+    <string name="kind_file">file</string>
+    <string name="kind_class">class</string>
+    <string name="kind_interface">interface</string>
+    <string name="kind_enum">enum</string>
+    <string name="kind_object">object</string>
+    <string name="kind_function">function</string>
+    <string name="kind_method">method</string>
+    <string name="kind_ui_component">UI component</string>
+    <string name="kind_trigger">event trigger</string>
+    <string name="kind_variable">variable</string>
+    <string name="kind_constant">constant</string>
+    <string name="kind_ui_element">UI element</string>
+    <string name="kind_style">style rule</string>
+    <string name="kind_config">config key</string>
+    <string name="kind_selector">selector</string>
+    <string name="kind_import">imports</string>
+    <string name="kind_comment">comment</string>
+    <string name="kind_code_block">code block</string>
+    <string name="kind_blank">blank lines</string>
+
+    <!-- Layers -->
+    <string name="layer_presentation">presentation</string>
+    <string name="layer_domain">domain</string>
+    <string name="layer_data">data</string>
+    <string name="layer_network">network</string>
+    <string name="layer_api">api</string>
+    <string name="layer_service">service</string>
+    <string name="layer_routing">routing</string>
+    <string name="layer_configuration">configuration</string>
+    <string name="layer_utility">utility</string>
+    <string name="layer_test">test</string>
+    <string name="layer_core">core</string>
+
+    <!-- Patterns -->
+    <string name="pattern_factory">Factory pattern</string>
+    <string name="pattern_builder">Builder pattern</string>
+    <string name="pattern_singleton">Singleton</string>
+    <string name="pattern_repository">Repository pattern</string>
+    <string name="pattern_controller">MVC controller</string>
+    <string name="pattern_service">Service layer</string>
+    <string name="pattern_adapter">Adapter pattern</string>
+    <string name="pattern_observer">Observer pattern</string>
+    <string name="pattern_strategy">Strategy pattern</string>
+    <string name="pattern_decorator">Decorator pattern</string>
+    <string name="pattern_facade">Facade pattern</string>
+    <string name="pattern_proxy">Proxy pattern</string>
+    <string name="pattern_viewmodel">MVVM ViewModel</string>
+    <string name="pattern_presenter">MVP presenter</string>
+    <string name="pattern_handler">Handler</string>
+    <string name="pattern_listener">Listener / callback</string>
+    <string name="pattern_manager">Manager / orchestrator</string>
+    <string name="pattern_provider">Provider</string>
+    <string name="pattern_mapper">Data mapper</string>
+    <string name="pattern_dto">Data transfer object</string>
+    <string name="pattern_exception">Error type</string>
+
+    <!-- Descriptions -->
+    <string name="describe_file">Source file `%1$s` analyzed recursively.</string>
+    <string name="describe_class">Class `%1$s` declares the type below.</string>
+    <string name="describe_interface">Interface `%1$s` defines a contract implemented elsewhere.</string>
+    <string name="describe_enum">Enum `%1$s` enumerates a fixed set of values.</string>
+    <string name="describe_object">Object/singleton `%1$s` holds shared state or helpers.</string>
+    <string name="describe_function">Function `%1$s` — callable routine. `%2$s`</string>
+    <string name="describe_method">Method `%1$s` defined on an enclosing type. `%2$s`</string>
+    <string name="describe_component">UI component `%1$s` renders part of the interface. `%2$s`</string>
+    <string name="describe_trigger">Trigger `%1$s` reacts to an event or route. `%2$s`</string>
+    <string name="describe_variable">Variable `%1$s` stores mutable state. `%2$s`</string>
+    <string name="describe_constant">Constant `%1$s` holds a fixed value. `%2$s`</string>
+    <string name="describe_tag">UI element `&lt;%1$s&gt;` in markup.</string>
+    <string name="describe_style">Style rule for selector `%1$s`.</string>
+    <string name="describe_config">Configuration key `%1$s`.</string>
+    <string name="describe_selector">Selector `%1$s`.</string>
+    <string name="describe_import">Import / dependency declarations.</string>
+    <string name="describe_comment">Comment / documentation block.</string>
+    <string name="describe_code_block">Contiguous code block without a detected symbol.</string>
+    <string name="describe_blank">Blank lines.</string>
+    <string name="describe_custom">Element `%1$s` in `%2$s`.</string>
+
+    <!-- Static rules -->
+    <string name="rule_hardcoded_secret_summary">Possible hardcoded credential.</string>
+    <string name="rule_hardcoded_secret_detail">A secret-looking value is assigned to a variable or property. Move it to secure storage / environment and rotate it.</string>
+    <string name="rule_sql_injection_summary">Possible SQL injection via string concatenation.</string>
+    <string name="rule_sql_injection_detail">A SQL statement is assembled from dynamic values. Use parameterized queries / prepared statements.</string>
+    <string name="rule_command_injection_summary">Possible command injection.</string>
+    <string name="rule_command_injection_detail">A shell/system command is built from dynamic input. Validate input and avoid the shell where possible.</string>
+    <string name="rule_code_eval_summary">Dynamic code / unsafe deserialization.</string>
+    <string name="rule_code_eval_detail">Executing code or deserializing untrusted data can lead to remote code execution. Use safe parsers and avoid eval.</string>
+    <string name="rule_tls_disable_summary">TLS verification disabled.</string>
+    <string name="rule_tls_disable_detail">Certificate or hostname verification is bypassed, enabling man-in-the-middle attacks. Remove this override.</string>
+    <string name="rule_xss_summary">Potential XSS sink.</string>
+    <string name="rule_xss_detail">Untrusted data written into the DOM can execute scripts. Sanitize input or use safe text APIs.</string>
+    <string name="rule_weak_crypto_summary">Weak cryptography algorithm.</string>
+    <string name="rule_weak_crypto_detail">MD5/SHA-1/DES/RC4 are broken for security purposes. Use SHA-256+ and AES-GCM.</string>
+    <string name="rule_insecure_random_summary">Non-cryptographic randomness.</string>
+    <string name="rule_insecure_random_detail">Random values used for tokens or security decisions should come from a cryptographically secure source.</string>
+    <string name="rule_cleartext_http_summary">Cleartext HTTP endpoint.</string>
+    <string name="rule_cleartext_http_detail">Traffic over http:// is unencrypted. Prefer https:// to protect data in transit.</string>
+    <string name="rule_empty_catch_summary">Empty catch block swallows errors.</string>
+    <string name="rule_empty_catch_detail">Silently ignoring exceptions hides failures. Log or handle the error explicitly.</string>
+    <string name="rule_todo_marker_summary">Unresolved TODO/FIXME.</string>
+    <string name="rule_todo_marker_detail">Outstanding work marker found; verify it does not represent incomplete or unsafe behavior.</string>
+    <string name="rule_debug_output_summary">Debug output in code.</string>
+    <string name="rule_debug_output_detail">Leftover debug logging can leak information or hurt performance in production.</string>
+    <string name="rule_insecure_cors_summary">Permissive CORS policy.</string>
+    <string name="rule_insecure_cors_detail">A wildcard CORS origin allows any site to read responses. Restrict to trusted origins.</string>
+    <string name="rule_clean_summary">No issues detected by static rules.</string>
+    <string name="rule_clean_detail">No known anti-pattern matched in this snippet. Enable LLM review for a deeper semantic assessment.</string>
+    <string name="rule_blank_summary">Blank line(s) — no code to assess.</string>
+    <string name="rule_blank_detail">These lines carry no executable content; they are listed to keep coverage complete.</string>
 </resources>

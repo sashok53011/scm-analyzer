@@ -26,6 +26,7 @@ class LlmAssessor(
         provider: ProviderConfig,
         maxElements: Int,
         progress: Progress = Progress.noop(),
+        responseLanguage: String = "English",
     ): Map<String, Assessment> {
         val candidates = elements.asSequence()
             .filter { it.kind != SymbolKinds.BLANK }
@@ -57,7 +58,7 @@ class LlmAssessor(
                 continue
             }
 
-            val messages = buildPrompt(pending)
+            val messages = buildPrompt(pending, responseLanguage)
             val response = runCatching { client.chat(provider, messages, maxTokens = 8192) }
                 .getOrElse { e ->
                     progress.message("LLM error: ${e.message}")
@@ -84,13 +85,14 @@ class LlmAssessor(
     private fun isSymbol(kind: String): Boolean = kind != SymbolKinds.CODE_BLOCK &&
         kind != SymbolKinds.FILE && kind != SymbolKinds.COMMENT
 
-    private fun buildPrompt(elements: List<CodeElement>): List<ChatMessage> {
+    private fun buildPrompt(elements: List<CodeElement>, responseLanguage: String): List<ChatMessage> {
         val system = """
             You are a senior application-security and code-quality reviewer.
             Review each code element and reply with STRICT JSON only: an array of objects
             {"id":"<id>","badge":"PASS|WARNING|VULNERABILITY|INFO","summary":"<=2 sentences","detail":"actionable explanation"}.
             Rules: VULNERABILITY = exploitable security risk. WARNING = bug, anti-pattern or performance problem.
             PASS = clean and well written. INFO = neutral/uncertain. Do not wrap JSON in markdown.
+            Write the "summary" and "detail" fields in $responseLanguage.
         """.trimIndent()
 
         val sb = StringBuilder()

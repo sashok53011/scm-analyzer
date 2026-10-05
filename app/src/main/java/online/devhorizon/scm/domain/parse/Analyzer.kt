@@ -108,6 +108,38 @@ object CategoryResolver {
         return null
     }
 
+    // ---- Localization-neutral keys (translated in the report layer) ----
+
+    private val layerKeyHints = listOf(
+        "test" to "test", "spec" to "test",
+        "ui" to "presentation", "screen" to "presentation", "view" to "presentation",
+        "compose" to "presentation", "fragment" to "presentation", "activity" to "presentation",
+        "component" to "presentation",
+        "domain" to "domain", "model" to "domain", "entity" to "domain",
+        "data" to "data", "repository" to "data", "dao" to "data", "db" to "data",
+        "network" to "network", "api" to "api", "service" to "service",
+        "controller" to "api", "route" to "routing",
+        "config" to "configuration", "util" to "utility", "helper" to "utility",
+    )
+
+    fun layerKey(path: String): String {
+        val lower = path.lowercase()
+        for ((hint, key) in layerKeyHints) if (lower.contains(hint)) return key
+        return "core"
+    }
+
+    private val patternKeyHints = listOf(
+        "factory", "builder", "singleton", "repository", "controller", "service", "adapter",
+        "observer", "strategy", "decorator", "facade", "proxy", "viewmodel", "presenter",
+        "handler", "listener", "manager", "provider", "mapper", "dto", "exception",
+    )
+
+    fun patternKey(name: String): String? {
+        val lower = name.lowercase()
+        for (hint in patternKeyHints) if (lower.endsWith(hint) || lower.contains(hint)) return hint
+        return null
+    }
+
     fun category(path: String, language: String, kind: String, name: String): String {
         val layer = layerOf(path)
         val pattern = patternOf(name)

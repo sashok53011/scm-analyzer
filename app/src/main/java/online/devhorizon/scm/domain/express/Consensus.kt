@@ -9,6 +9,7 @@ data class ConsensusVerdict(
     val votes: Int,
     val total: Int,
     val note: String,
+    val counts: Map<Badge, Int> = emptyMap(),
 )
 
 /** Majority vote across models; escalates to the most severe verdict when they disagree. */
@@ -43,6 +44,6 @@ object Consensus {
         } else {
             "All ${votes.size} model(s) agree: ${badge.label}."
         }
-        return ConsensusVerdict(badge, disputed, votes.size, providerIds.size, note)
+        return ConsensusVerdict(badge, disputed, votes.size, providerIds.size, note, counts)
     }
 }

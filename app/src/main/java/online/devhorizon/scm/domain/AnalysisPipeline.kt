@@ -40,7 +40,10 @@ class AnalysisPipeline(
         if (options.useLlm && provider != null && provider.isReady) {
             val cache = cacheFile?.let { AssessmentCache(it) }
             val assessor = LlmAssessor(client, cache)
-            val result = assessor.assess(index.elements, provider, options.maxLlmElements, progress)
+            val result = assessor.assess(
+                index.elements, provider, options.maxLlmElements, progress,
+                responseLanguage = options.responseLanguage,
+            )
             llmMap.putAll(result)
             llmAssessed = result.size
         }
@@ -51,6 +54,7 @@ class AnalysisPipeline(
                 badge = a.badge,
                 assessmentSummary = a.summary,
                 assessmentDetail = a.detail,
+                assessmentRuleKey = a.ruleKey,
             )
         }
 

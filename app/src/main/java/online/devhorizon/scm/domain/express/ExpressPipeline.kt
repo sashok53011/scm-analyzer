@@ -55,13 +55,21 @@ class ExpressPipeline(
             if (progress.isCancelled()) break
             progress.message("Express → ${provider.label} (${provider.model})")
             val cache = cacheFile?.let { AssessmentCache(it) }
-            val llm = LlmAssessor(client, cache).assess(index.elements, provider, options.maxLlmElements, progress)
+            val llm = LlmAssessor(client, cache).assess(
+                index.elements, provider, options.maxLlmElements, progress,
+                responseLanguage = options.responseLanguage,
+            )
             if (llm.isEmpty() && progress.isCancelled()) break
             verdicts[provider.id] = llm
 
             val elements = index.elements.map { e ->
                 val a = llm[e.id] ?: staticMap.getValue(e.id)
-                e.copy(badge = a.badge, assessmentSummary = a.summary, assessmentDetail = a.detail)
+                e.copy(
+                    badge = a.badge,
+                    assessmentSummary = a.summary,
+                    assessmentDetail = a.detail,
+                    assessmentRuleKey = a.ruleKey,
+                )
             }
             val result = ResultAssembler.assemble(index, elements, true, provider.label, provider.model, llm.size)
             val file = storage.save(result, htmlBuilder.build(result))

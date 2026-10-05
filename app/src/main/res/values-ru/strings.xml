@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SCM Analyzer</string>
+
+    <!-- Common -->
+    <string name="cd_providers">Провайдеры</string>
+    <string name="cd_language">Язык</string>
+    <string name="cd_back">Назад</string>
+    <string name="cd_share">Поделиться</string>
+    <string name="cd_open_browser">Открыть в браузере</string>
+    <string name="cd_edit">Изменить</string>
+    <string name="cd_duplicate">Дублировать</string>
+    <string name="cd_delete">Удалить</string>
+    <string name="action_cancel">Отмена</string>
+    <string name="action_save">Сохранить</string>
+    <string name="action_add">Добавить</string>
+    <string name="action_reset">Сбросить</string>
+    <string name="action_change">Изменить</string>
+
+    <!-- Language -->
+    <string name="language_title">Язык</string>
+    <string name="language_system">Системный</string>
+
+    <!-- Home -->
+    <string name="home_hero_title">Поймите любую кодовую базу</string>
+    <string name="home_hero_body">Рекурсивный анализ репозитория с интерактивным сворачиваемым HTML-отчётом и мульти-LLM оценкой безопасности.</string>
+    <string name="home_get_started">Начать</string>
+    <string name="home_open_local_title">Открыть локальный репозиторий</string>
+    <string name="home_open_local_sub">Выберите папку на устройстве и проанализируйте её на месте.</string>
+    <string name="home_clone_title">Клонировать с GitHub</string>
+    <string name="home_clone_sub">Скачать публичный репозиторий и проанализировать рабочее дерево.</string>
+    <string name="home_sample_title">Загрузить встроенный пример</string>
+    <string name="home_sample_sub">Мгновенно проверьте весь конвейер на небольшом многоязычном репозитории.</string>
+    <string name="home_working">Работа…</string>
+    <string name="home_error_title">Что-то пошло не так</string>
+    <string name="home_active_provider">Активный провайдер</string>
+    <string name="home_pipeline">Конвейер анализа</string>
+    <string name="home_step_ingest_title">Приём</string>
+    <string name="home_step_ingest_body">Локальная папка (SAF) или загрузка с GitHub с умной фильтрацией бинарников и вендоров.</string>
+    <string name="home_step_parse_title">Разбор</string>
+    <string name="home_step_parse_body">Regex/эвристические извлекатели для Kotlin, Java, JS/TS, Python, C/C++, Go, Rust, C#, PHP, Ruby, Shell и разметки.</string>
+    <string name="home_step_map_title">Разметка строк</string>
+    <string name="home_step_map_body">Каждая строка реального кода привязана к строке отчёта; покрытие показывается как N/N.</string>
+    <string name="home_step_assess_title">Оценка</string>
+    <string name="home_step_assess_body">Локальные статические правила и опциональная LLM-проверка: предупреждение, уязвимость, пройдено.</string>
+    <string name="home_step_report_title">Отчёт</string>
+    <string name="home_step_report_body">Автономный интерактивный HTML с 4 колонками, поиском, фильтрами и тёмной темой.</string>
+    <string name="home_build">Сборка %1$s</string>
+    <string name="home_device">%1$s %2$s · Android %3$s (API %4$d)</string>
+    <string name="clone_dialog_title">Клонировать с GitHub</string>
+    <string name="clone_dialog_hint">Введите URL публичного репозитория или owner/repo.</string>
+    <string name="clone_field">Репозиторий</string>
+    <string name="clone_placeholder">owner/repo или https://github.com/owner/repo</string>
+    <string name="clone_action">Клонировать</string>
+
+    <!-- Analyze -->
+    <string name="analyze_title">Анализ</string>
+    <string name="analyze_no_repo">Репозиторий не выбран.</string>
+    <string name="analyze_repo_meta">%1$s · %2$d файлов · %3$s МБ</string>
+    <string name="analyze_options">Параметры</string>
+    <string name="analyze_llm_review">LLM-проверка</string>
+    <string name="analyze_provider_line">Провайдер: %1$s · %2$s</string>
+    <string name="analyze_provider_missing">Провайдер не настроен (нет API-ключа). Настройте его на экране «Провайдеры».</string>
+    <string name="analyze_max_files">Максимум файлов: %1$d</string>
+    <string name="analyze_llm_budget">Бюджет элементов для LLM: %1$d</string>
+    <string name="analyze_run">Запустить анализ</string>
+    <string name="analyze_express">Экспресс-отчёт · все провайдеры (%1$d)</string>
+    <string name="analyze_express_desc">Экспресс прогоняет один и тот же код по очереди через все настроенные рабочие провайдеры, затем объединяет вердикты в общий супер-отчёт по консенсусу.</string>
+    <string name="analyze_running">Выполняется…</string>
+    <string name="analyze_done_title">Анализ завершён</string>
+    <string name="analyze_done_meta">%1$d элементов · %2$d/%3$d файлов · покрытие кода %4$s%%</string>
+    <string name="analyze_done_verdicts">Уязвимости: %1$d · Предупреждения: %2$d · Пройдено: %3$d</string>
+    <string name="analyze_view_report">Открыть интерактивный отчёт</string>
+    <string name="analyze_failed">Ошибка</string>
+    <string name="analyze_express_done_title">Экспресс-отчёт готов</string>
+    <string name="analyze_express_done_meta">%1$d отчёт(ов) по моделям + супер-отчёт · %2$d элементов</string>
+    <string name="analyze_express_done_verdicts">Уязвимости: %1$d · Предупреждения: %2$d</string>
+    <string name="analyze_view_super">Открыть супер-отчёт</string>
+    <string name="analyze_log">Журнал</string>
+
+    <!-- Providers -->
+    <string name="providers_title">LLM-провайдеры</string>
+    <string name="providers_intro">Выберите провайдера для LLM-проверки. API-ключи хранятся на устройстве в зашифрованном виде.</string>
+    <string name="providers_api_key_missing">API-ключ: отсутствует</string>
+    <string name="providers_api_key_set">API-ключ: задан</string>
+    <string name="providers_no_key">API-ключ не требуется</string>
+    <string name="providers_requires_key">Требуется API-ключ</string>
+    <string name="field_base_url">Базовый URL</string>
+    <string name="field_model">Модель</string>
+    <string name="field_api_key">API-ключ</string>
+    <string name="providers_test">Проверить соединение</string>
+    <string name="providers_testing">Проверка…</string>
+    <string name="providers_test_ok">ОК · доступно моделей: %1$d</string>
+    <string name="providers_test_fail">Ошибка: %1$s</string>
+    <string name="provider_copy_suffix">%1$s (копия)</string>
+    <string name="provider_default_custom_label">Свой провайдер</string>
+    <string name="provider_default_custom_note">OpenAI-совместимый эндпоинт.</string>
+    <string name="provider_note_devhorizon">OpenAI-совместимый, API-ключ не требуется.</string>
+    <string name="provider_note_ollama">API-ключ или OAuth через `ollama signin`.</string>
+    <string name="provider_note_zen">Бесплатная модель по умолчанию; API-ключ OpenCode Zen.</string>
+    <string name="provider_note_go">Выбор своей модели; требуется API-ключ.</string>
+
+    <!-- Report screen -->
+    <string name="report_title">Отчёт</string>
+    <string name="report_none_title">Отчёта пока нет.</string>
+    <string name="report_none_body">Запустите анализ, чтобы сгенерировать интерактивный HTML-отчёт.</string>
+    <string name="report_tab_default">Отчёт</string>
+    <string name="report_tab_super">Супер-отчёт</string>
+
+    <!-- Errors / status shown in UI -->
+    <string name="err_clone_failed">Клонирование не удалось: %1$s</string>
+    <string name="err_folder_failed">Не удалось открыть папку: %1$s</string>
+    <string name="err_sample_failed">Не удалось загрузить пример: %1$s</string>
+    <string name="err_provider_not_configured">Провайдер \'%1$s\' не настроен (нет ключа или URL).</string>
+    <string name="err_no_providers">Нет рабочих провайдеров. Настройте хотя бы один на экране «Провайдеры».</string>
+
+    <!-- Report: builder labels -->
+    <string name="rep_llm_off">LLM-проверка: выключена (только статические правила)</string>
+    <string name="rep_llm_on">LLM: %1$s / %2$s (проверено %3$d)</string>
+    <string name="rep_llm_ensemble">Ансамбль (%1$d моделей)</string>
+    <string name="rep_stat_files">Файлы</string>
+    <string name="rep_stat_languages">Языки</string>
+    <string name="rep_stat_elements">Элементы</string>
+    <string name="rep_stat_code_lines">Строки кода</string>
+    <string name="rep_stat_vulnerabilities">Уязвимости</string>
+    <string name="rep_stat_warnings">Предупреждения</string>
+    <string name="rep_stat_passed">Пройдено</string>
+    <string name="rep_stat_models">Модели</string>
+    <string name="rep_stat_agreed">Согласие</string>
+    <string name="rep_stat_disputed">Разногласия</string>
+    <string name="rep_coverage_code">Покрытие реального кода (исполняемые строки привязаны к строкам отчёта)</string>
+    <string name="rep_coverage_symbol">Покрытие символов (строки внутри найденных символов)</string>
+    <string name="rep_footer_files">проанализировано %1$d/%2$d файлов</string>
+    <string name="rep_footer_no_warnings">без предупреждений</string>
+    <string name="rep_footer_warnings">предупреждений: %1$d</string>
+    <string name="rep_generated_by">Сгенерировано SCM Analyzer</string>
+    <string name="rep_static_rules">Статические правила</string>
+    <string name="rep_not_assessed">не оценено этой моделью</string>
+    <string name="consensus_none">Ни одна модель не оценивала.</string>
+    <string name="consensus_agree">Все модели (%1$d) согласны: %2$s.</string>
+    <string name="consensus_disagree">Модели расходятся (%1$s) — повышено до «%2$s».</string>
+
+    <!-- Report template chrome -->
+    <string name="t_report_subtitle">отчёт</string>
+    <string name="t_super_subtitle">супер-отчёт</string>
+    <string name="t_search">Поиск по коду, именам, файлам…</string>
+    <string name="t_all_kinds">Все типы</string>
+    <string name="t_all_verdicts">Все вердикты</string>
+    <string name="t_hide_blank">Скрыть пустые</string>
+    <string name="t_disputed_only">Только спорные</string>
+    <string name="t_expand_all">Развернуть всё</string>
+    <string name="t_collapse_all">Свернуть всё</string>
+    <string name="t_badge_vuln">Уязвимость</string>
+    <string name="t_badge_warn">Предупреждение</string>
+    <string name="t_badge_pass">Пройдено</string>
+    <string name="t_badge_info">Инфо</string>
+    <string name="t_col_name">Имя / Описание</string>
+    <string name="t_col_category">Категория / Технология / Тип</string>
+    <string name="t_col_code">Точный код и ссылка на строки</string>
+    <string name="t_col_quality">Качество и безопасность кода</string>
+    <string name="t_col_consensus">Консенсус / качество</string>
+    <string name="t_model_verdicts">Вердикты моделей (%1$d)</string>
+    <string name="t_legend_pass">Оптимально</string>
+    <string name="t_legend_warn">Проблема / предупреждение</string>
+    <string name="t_legend_vuln">Уязвимость</string>
+    <string name="t_legend_info">Инфо</string>
+    <string name="t_tip">Подсказка: любой блок шире ¼ экрана сворачивается автоматически — нажмите, чтобы раскрыть.</string>
+    <string name="t_disputed_badge">спорно</string>
+    <string name="t_rows_counter">%1$d / %2$d строк</string>
+    <string name="t_rows_word">строк</string>
+
+    <!-- Kinds -->
+    <string name="kind_file">файл</string>
+    <string name="kind_class">класс</string>
+    <string name="kind_interface">интерфейс</string>
+    <string name="kind_enum">перечисление</string>
+    <string name="kind_object">объект</string>
+    <string name="kind_function">функция</string>
+    <string name="kind_method">метод</string>
+    <string name="kind_ui_component">UI-компонент</string>
+    <string name="kind_trigger">триггер события</string>
+    <string name="kind_variable">переменная</string>
+    <string name="kind_constant">константа</string>
+    <string name="kind_ui_element">UI-элемент</string>
+    <string name="kind_style">правило стиля</string>
+    <string name="kind_config">ключ конфигурации</string>
+    <string name="kind_selector">селектор</string>
+    <string name="kind_import">импорты</string>
+    <string name="kind_comment">комментарий</string>
+    <string name="kind_code_block">блок кода</string>
+    <string name="kind_blank">пустые строки</string>
+
+    <!-- Layers -->
+    <string name="layer_presentation">представление</string>
+    <string name="layer_domain">домен</string>
+    <string name="layer_data">данные</string>
+    <string name="layer_network">сеть</string>
+    <string name="layer_api">api</string>
+    <string name="layer_service">сервис</string>
+    <string name="layer_routing">маршрутизация</string>
+    <string name="layer_configuration">конфигурация</string>
+    <string name="layer_utility">утилиты</string>
+    <string name="layer_test">тесты</string>
+    <string name="layer_core">ядро</string>
+
+    <!-- Patterns -->
+    <string name="pattern_factory">Паттерн «Фабрика»</string>
+    <string name="pattern_builder">Паттерн «Строитель»</string>
+    <string name="pattern_singleton">Одиночка</string>
+    <string name="pattern_repository">Паттерн «Репозиторий»</string>
+    <string name="pattern_controller">MVC-контроллер</string>
+    <string name="pattern_service">Сервисный слой</string>
+    <string name="pattern_adapter">Паттерн «Адаптер»</string>
+    <string name="pattern_observer">Паттерн «Наблюдатель»</string>
+    <string name="pattern_strategy">Паттерн «Стратегия»</string>
+    <string name="pattern_decorator">Паттерн «Декоратор»</string>
+    <string name="pattern_facade">Паттерн «Фасад»</string>
+    <string name="pattern_proxy">Паттерн «Прокси»</string>
+    <string name="pattern_viewmodel">MVVM ViewModel</string>
+    <string name="pattern_presenter">MVP-презентер</string>
+    <string name="pattern_handler">Обработчик</string>
+    <string name="pattern_listener">Слушатель / callback</string>
+    <string name="pattern_manager">Менеджер / оркестратор</string>
+    <string name="pattern_provider">Провайдер</string>
+    <string name="pattern_mapper">Преобразователь данных</string>
+    <string name="pattern_dto">DTO-Objekt</string>
+    <string name="pattern_exception">Тип ошибки</string>
+
+    <!-- Descriptions -->
+    <string name="describe_file">Исходный файл `%1$s`, проанализированный рекурсивно.</string>
+    <string name="describe_class">Класс `%1$s` объявляет тип ниже.</string>
+    <string name="describe_interface">Интерфейс `%1$s` задаёт контракт, реализуемый в другом месте.</string>
+    <string name="describe_enum">Перечисление `%1$s` задаёт фиксированный набор значений.</string>
+    <string name="describe_object">Объект/одиночка `%1$s` хранит общее состояние или помощники.</string>
+    <string name="describe_function">Функция `%1$s` — вызываемая процедура. `%2$s`</string>
+    <string name="describe_method">Метод `%1$s`, определённый на содержащем типе. `%2$s`</string>
+    <string name="describe_component">UI-компонент `%1$s` отрисовывает часть интерфейса. `%2$s`</string>
+    <string name="describe_trigger">Триггер `%1$s` реагирует на событие или маршрут. `%2$s`</string>
+    <string name="describe_variable">Переменная `%1$s` хранит изменяемое состояние. `%2$s`</string>
+    <string name="describe_constant">Константа `%1$s` хранит фиксированное значение. `%2$s`</string>
+    <string name="describe_tag">UI-элемент `&lt;%1$s&gt;` в разметке.</string>
+    <string name="describe_style">Правило стиля для селектора `%1$s`.</string>
+    <string name="describe_config">Ключ конфигурации `%1$s`.</string>
+    <string name="describe_selector">Селектор `%1$s`.</string>
+    <string name="describe_import">Объявления импортов / зависимостей.</string>
+    <string name="describe_comment">Блок комментариев / документации.</string>
+    <string name="describe_code_block">Непрерывный блок кода без найденного символа.</string>
+    <string name="describe_blank">Пустые строки.</string>
+    <string name="describe_custom">Элемент `%1$s` в `%2$s`.</string>
+
+    <!-- Static rules -->
+    <string name="rule_hardcoded_secret_summary">Возможны захардкоженные учётные данные.</string>
+    <string name="rule_hardcoded_secret_detail">Значение, похожее на секрет, присвоено переменной или свойству. Перенесите его в защищённое хранилище/переменные окружения и смените.</string>
+    <string name="rule_sql_injection_summary">Возможна SQL-инъекция через конкатенацию строк.</string>
+    <string name="rule_sql_injection_detail">SQL-запрос собирается из динамических значений. Используйте параметризованные запросы / prepared statements.</string>
+    <string name="rule_command_injection_summary">Возможна инъекция команд.</string>
+    <string name="rule_command_injection_detail">Команда оболочки/системы строится из динамического ввода. Проверяйте ввод и по возможности избегайте оболочки.</string>
+    <string name="rule_code_eval_summary">Динамический код / небезопасная десериализация.</string>
+    <string name="rule_code_eval_detail">Выполнение кода или десериализация недоверенных данных может привести к удалённому выполнению кода. Используйте безопасные парсеры и избегайте eval.</string>
+    <string name="rule_tls_disable_summary">Проверка TLS отключена.</string>
+    <string name="rule_tls_disable_detail">Проверка сертификата или имени хоста обходится, что открывает атаки «человек посередине». Уберите это переопределение.</string>
+    <string name="rule_xss_summary">Потенциальный сток XSS.</string>
+    <string name="rule_xss_detail">Недоверенные данные, записанные в DOM, могут выполнить скрипты. Санитизируйте ввод или используйте безопасные текстовые API.</string>
+    <string name="rule_weak_crypto_summary">Слабый криптографический алгоритм.</string>
+    <string name="rule_weak_crypto_detail">MD5/SHA-1/DES/RC4 непригодны для безопасности. Используйте SHA-256+ и AES-GCM.</string>
+    <string name="rule_insecure_random_summary">Небезопасная случайность.</string>
+    <string name="rule_insecure_random_detail">Случайные значения для токенов и решений безопасности должны браться из криптографически стойкого источника.</string>
+    <string name="rule_cleartext_http_summary">Эндпоинт по незашифрованному HTTP.</string>
+    <string name="rule_cleartext_http_detail">Трафик по http:// не шифруется. Предпочитайте https:// для защиты данных в пути.</string>
+    <string name="rule_empty_catch_summary">Пустой блок catch проглатывает ошибки.</string>
+    <string name="rule_empty_catch_detail">Молчаливое игнорирование исключений скрывает сбои. Логируйте или обрабатывайте ошибку явно.</string>
+    <string name="rule_todo_marker_summary">Незакрытый TODO/FIXME.</string>
+    <string name="rule_todo_marker_detail">Найдена метка незавершённой работы; проверьте, не означает ли она неполное или небезопасное поведение.</string>
+    <string name="rule_debug_output_summary">Отладочный вывод в коде.</string>
+    <string name="rule_debug_output_detail">Оставленное отладочное логирование может раскрыть информацию или снизить производительность в проде.</string>
+    <string name="rule_insecure_cors_summary">Разрешительная политика CORS.</string>
+    <string name="rule_insecure_cors_detail">Источник CORS с подстановочным знаком позволяет любому сайту читать ответы. Ограничьте доверенными источниками.</string>
+    <string name="rule_clean_summary">Статические правила проблем не нашли.</string>
+    <string name="rule_clean_detail">Известных антипаттернов в этом фрагменте не найдено. Включите LLM-проверку для более глубокой смысловой оценки.</string>
+    <string name="rule_blank_summary">Пустые строки — нечего оценивать.</string>
+    <string name="rule_blank_detail">Эти строки не содержат исполняемого кода; они перечислены для полноты покрытия.</string>
+</resources>

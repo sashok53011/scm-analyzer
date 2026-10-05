@@ -2,6 +2,8 @@ package online.devhorizon.scm.ui
 
 import android.app.Application
 import android.net.Uri
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.os.LocaleListCompat
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
@@ -13,6 +15,7 @@ import kotlinx.coroutines.withContext
 import online.devhorizon.scm.data.llm.ProviderConfig
 import online.devhorizon.scm.data.llm.ProviderStore
 import online.devhorizon.scm.data.llm.Providers
+import online.devhorizon.scm.R
 import online.devhorizon.scm.domain.AnalysisPipeline
 import online.devhorizon.scm.domain.Progress
 import online.devhorizon.scm.domain.express.ExpressPipeline
@@ -26,6 +29,7 @@ import online.devhorizon.scm.domain.model.AnalysisResult
 import online.devhorizon.scm.report.HtmlReportBuilder
 import online.devhorizon.scm.report.ReportStorage
 import java.io.File
+import java.util.Locale
 
 data class PendingRepo(
     val source: RepoSource,
@@ -77,6 +81,36 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
     val selectedProvider: ProviderConfig
         get() = Providers.find(_providers.value, _selectedId.value)
 
+    // ---- Language ----
+
+    /** null → system default; otherwise a BCP-47 tag such as "ru" or "de". */
+    fun currentLanguageTag(): String? =
+        AppCompatDelegate.getApplicationLocales().toLanguageTags().ifBlank { null }
+
+    fun setAppLanguage(tag: String?) {
+        val locales = if (tag.isNullOrBlank()) {
+            LocaleListCompat.getEmptyLocaleList()
+        } else {
+            LocaleListCompat.forLanguageTags(tag)
+        }
+        AppCompatDelegate.setApplicationLocales(locales)
+    }
+
+    /** Human-readable language name handed to the LLM. */
+    private fun responseLanguageName(): String {
+        val tag = (currentLanguageTag() ?: Locale.getDefault().language).lowercase(Locale.ROOT)
+        return when {
+            tag.startsWith("ru") -> "Russian"
+            tag.startsWith("de") -> "German"
+            else -> "English"
+        }
+    }
+
+    private fun tr(id: Int, vararg args: Any): String {
+        val res = getApplication<Application>().resources
+        return if (args.isEmpty()) res.getString(id) else res.getString(id, *args)
+    }
+
     // ---- Providers ----
 
     fun selectProvider(id: String) {
@@ -98,12 +132,12 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
     fun addProvider(onReady: (ProviderConfig) -> Unit) {
         val cfg = ProviderConfig(
             id = Providers.newCustomId(),
-            label = "Custom provider",
+            label = tr(R.string.provider_default_custom_label),
             baseUrl = "https://",
             model = "",
             apiKey = "",
             requiresKey = true,
-            notes = "OpenAI-compatible endpoint.",
+            notes = tr(R.string.provider_default_custom_note),
         )
         _providers.value = _providers.value + cfg
         store.saveProviders(_providers.value)
@@ -120,7 +154,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
 
     fun duplicateProvider(id: String, onReady: (ProviderConfig) -> Unit) {
         val src = _providers.value.firstOrNull { it.id == id } ?: return
-        val copy = src.copy(id = Providers.newCustomId(), label = "${src.label} (copy)")
+        val copy = src.copy(id = Providers.newCustomId(), label = tr(R.string.provider_copy_suffix, src.label))
         _providers.value = _providers.value + copy
         store.saveProviders(_providers.value)
         onReady(copy)
@@ -154,7 +188,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
                     )
                 }
             }.onSuccess { _pending.value = it; onReady() }
-                .onFailure { _analysis.value = AnalysisUi.Failed("Cannot open folder: ${it.message}") }
+                .onFailure { _analysis.value = AnalysisUi.Failed(tr(R.string.err_folder_failed, it.message ?: "")) }
             _busy.value = false
         }
     }
@@ -181,7 +215,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
                     )
                 }
             }.onSuccess { _pending.value = it; onReady() }
-                .onFailure { _analysis.value = AnalysisUi.Failed("Clone failed: ${it.message}") }
+                .onFailure { _analysis.value = AnalysisUi.Failed(tr(R.string.err_clone_failed, it.message ?: "")) }
             _busy.value = false
         }
     }
@@ -208,7 +242,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
                     )
                 }
             }.onSuccess { _pending.value = it; onReady() }
-                .onFailure { _analysis.value = AnalysisUi.Failed("Sample load failed: ${it.message}") }
+                .onFailure { _analysis.value = AnalysisUi.Failed(tr(R.string.err_sample_failed, it.message ?: "")) }
             _busy.value = false
         }
     }
@@ -245,10 +279,11 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
                     maxFiles = maxFiles,
                     useLlm = useLlm,
                     maxLlmElements = maxLlmElements,
+                    responseLanguage = responseLanguageName(),
                 )
                 val provider = if (useLlm) selectedProvider else null
                 if (useLlm && (provider == null || !provider.isReady)) {
-                    _analysis.value = AnalysisUi.Failed("Provider '${selectedProvider.label}' is not configured (missing key or URL).")
+                    _analysis.value = AnalysisUi.Failed(tr(R.string.err_provider_not_configured, selectedProvider.label))
                     return@launch
                 }
                 val cacheFile = File(getApplication<Application>().filesDir, "assessment-cache.json")
@@ -267,7 +302,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
         val pending = _pending.value ?: return
         val ready = readyProviders()
         if (ready.isEmpty()) {
-            _analysis.value = AnalysisUi.Failed("No usable providers. Configure at least one on the Providers screen.")
+            _analysis.value = AnalysisUi.Failed(tr(R.string.err_no_providers))
             return
         }
         cancelRequested = false
@@ -277,7 +312,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
 
         viewModelScope.launch {
             try {
-                val options = AnalysisOptions(maxFiles = maxFiles, useLlm = true, maxLlmElements = maxLlmElements)
+                val options = AnalysisOptions(maxFiles = maxFiles, useLlm = true, maxLlmElements = maxLlmElements, responseLanguage = responseLanguageName())
                 val cacheFile = File(getApplication<Application>().filesDir, "assessment-cache.json")
                 val outcome = ExpressPipeline(getApplication())
                     .run(pending.source, options, ready, cacheFile, progress)

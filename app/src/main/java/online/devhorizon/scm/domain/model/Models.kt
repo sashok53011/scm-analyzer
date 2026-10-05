@@ -20,9 +20,13 @@ data class CodeElement(
     val startLine: Int,
     val endLine: Int,
     val code: String,
+    /** Declaration line(s) used for localized descriptions. */
+    val declaration: String = "",
     val badge: Badge = Badge.INFO,
     val assessmentSummary: String = "",
     val assessmentDetail: String = "",
+    /** Static-rule key for localization; null for LLM-generated assessments. */
+    val assessmentRuleKey: String? = null,
 ) {
     val lineLabel: String
         get() = if (startLine == endLine) "L$startLine" else "L$startLine–$endLine"
@@ -70,4 +74,6 @@ data class AnalysisOptions(
     val includeComments: Boolean = false,
     /** When false (default) markdown/text/doc files are not analyzed at all. */
     val includeDocs: Boolean = false,
+    /** Language the LLM should answer in (e.g. "English", "Russian", "German"). */
+    val responseLanguage: String = "English",
 )

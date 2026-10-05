@@ -142,6 +142,7 @@ class CodeIndexer(
                         startLine = start,
                         endLine = end,
                         code = code,
+                        declaration = symbol.declaration,
                     )
                 )
                 kindCounts[symbol.kind] = (kindCounts[symbol.kind] ?: 0) + 1
@@ -181,6 +182,7 @@ class CodeIndexer(
                             startLine = start,
                             endLine = end,
                             code = code,
+                            declaration = lines[start - 1].trim(),
                         )
                     )
                     kindCounts[kind] = (kindCounts[kind] ?: 0) + 1

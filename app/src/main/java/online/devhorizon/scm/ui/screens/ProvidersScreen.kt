@@ -14,7 +14,6 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ContentCopy
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Edit
@@ -41,14 +40,26 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
+import online.devhorizon.scm.R
 import online.devhorizon.scm.data.llm.OpenAiCompatClient
 import online.devhorizon.scm.data.llm.ProviderConfig
+import online.devhorizon.scm.data.llm.Providers
 import online.devhorizon.scm.ui.MainViewModel
+
+@Composable
+private fun providerNote(provider: ProviderConfig): String = when (provider.id) {
+    Providers.DEVHORIZON -> stringResource(R.string.provider_note_devhorizon)
+    Providers.OLLAMA_CLOUD -> stringResource(R.string.provider_note_ollama)
+    Providers.OPENCODE_ZEN -> stringResource(R.string.provider_note_zen)
+    Providers.OPENCODE_GO -> stringResource(R.string.provider_note_go)
+    else -> provider.notes
+}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -60,15 +71,15 @@ fun ProvidersScreen(vm: MainViewModel, onBack: () -> Unit) {
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
-                title = { Text("LLM providers") },
+                title = { Text(stringResource(R.string.providers_title)) },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(R.string.cd_back))
                     }
                 },
                 actions = {
-                    TextButton(onClick = { vm.addProvider { editing = it } }) { Text("Add") }
-                    TextButton(onClick = { vm.resetProviders() }) { Text("Reset") }
+                    TextButton(onClick = { vm.addProvider { editing = it } }) { Text(stringResource(R.string.action_add)) }
+                    TextButton(onClick = { vm.resetProviders() }) { Text(stringResource(R.string.action_reset)) }
                 },
             )
         },
@@ -82,7 +93,7 @@ fun ProvidersScreen(vm: MainViewModel, onBack: () -> Unit) {
             verticalArrangement = Arrangement.spacedBy(10.dp),
         ) {
             Text(
-                "Select the provider used for LLM review. API keys are stored encrypted on device.",
+                stringResource(R.string.providers_intro),
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
@@ -108,7 +119,8 @@ fun ProvidersScreen(vm: MainViewModel, onBack: () -> Unit) {
                                     Text(provider.model, style = MaterialTheme.typography.bodySmall)
                                     if (provider.requiresKey) {
                                         Text(
-                                            if (provider.apiKey.isBlank()) "API key: missing" else "API key: set",
+                                            if (provider.apiKey.isBlank()) stringResource(R.string.providers_api_key_missing)
+                                            else stringResource(R.string.providers_api_key_set),
                                             style = MaterialTheme.typography.bodySmall,
                                             color = if (provider.apiKey.isBlank()) {
                                                 MaterialTheme.colorScheme.error
@@ -117,20 +129,20 @@ fun ProvidersScreen(vm: MainViewModel, onBack: () -> Unit) {
                                             },
                                         )
                                     } else {
-                                        Text("No API key required", style = MaterialTheme.typography.bodySmall)
+                                        Text(stringResource(R.string.providers_no_key), style = MaterialTheme.typography.bodySmall)
                                     }
                                 }
                             },
                         )
                         IconButton(onClick = { editing = provider }) {
-                            Icon(Icons.Filled.Edit, contentDescription = "Edit")
+                            Icon(Icons.Filled.Edit, contentDescription = stringResource(R.string.cd_edit))
                         }
                         IconButton(onClick = { vm.duplicateProvider(provider.id) { editing = it } }) {
-                            Icon(Icons.Filled.ContentCopy, contentDescription = "Duplicate")
+                            Icon(Icons.Filled.ContentCopy, contentDescription = stringResource(R.string.cd_duplicate))
                         }
-                        if (!online.devhorizon.scm.data.llm.Providers.isBuiltIn(provider.id)) {
+                        if (!Providers.isBuiltIn(provider.id)) {
                             IconButton(onClick = { vm.removeProvider(provider.id) }) {
-                                Icon(Icons.Filled.Delete, contentDescription = "Delete")
+                                Icon(Icons.Filled.Delete, contentDescription = stringResource(R.string.cd_delete))
                             }
                         }
                     }
@@ -143,6 +155,7 @@ fun ProvidersScreen(vm: MainViewModel, onBack: () -> Unit) {
     editing?.let { current ->
         ProviderEditDialog(
             initial = current,
+            note = providerNote(current),
             onDismiss = { editing = null },
             onSave = { vm.saveProvider(it); editing = null },
         )
@@ -152,6 +165,7 @@ fun ProvidersScreen(vm: MainViewModel, onBack: () -> Unit) {
 @Composable
 private fun ProviderEditDialog(
     initial: ProviderConfig,
+    note: String,
     onDismiss: () -> Unit,
     onSave: (ProviderConfig) -> Unit,
 ) {
@@ -172,7 +186,7 @@ private fun ProviderEditDialog(
                     value = baseUrl,
                     onValueChange = { baseUrl = it },
                     singleLine = true,
-                    label = { Text("Base URL") },
+                    label = { Text(stringResource(R.string.field_base_url)) },
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Uri,
                         capitalization = KeyboardCapitalization.None,
@@ -183,7 +197,7 @@ private fun ProviderEditDialog(
                     value = model,
                     onValueChange = { model = it },
                     singleLine = true,
-                    label = { Text("Model") },
+                    label = { Text(stringResource(R.string.field_model)) },
                     keyboardOptions = KeyboardOptions(
                         capitalization = KeyboardCapitalization.None,
                         autoCorrectEnabled = false,
@@ -193,14 +207,14 @@ private fun ProviderEditDialog(
                     value = apiKey,
                     onValueChange = { apiKey = it },
                     singleLine = true,
-                    label = { Text("API key") },
+                    label = { Text(stringResource(R.string.field_api_key)) },
                 )
                 Row(verticalAlignment = Alignment.CenterVertically) {
-                    Text("Requires API key", modifier = Modifier.weight(1f))
+                    Text(stringResource(R.string.providers_requires_key), modifier = Modifier.weight(1f))
                     Switch(checked = requiresKey, onCheckedChange = { requiresKey = it })
                 }
-                if (initial.notes.isNotBlank()) {
-                    Text(initial.notes, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                if (note.isNotBlank()) {
+                    Text(note, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 }
                 TextButton(
                     enabled = !testing,
@@ -210,23 +224,30 @@ private fun ProviderEditDialog(
                         val cfg = initial.copy(baseUrl = baseUrl, model = model, apiKey = apiKey, requiresKey = requiresKey)
                         scope.launch {
                             testResult = runCatching {
-                                val models = OpenAiCompatClient().listModels(cfg)
-                                "OK · ${models.size} models available"
-                            }.getOrElse { "Failed: ${it.message}" }
+                                OpenAiCompatClient().listModels(cfg).size
+                            }.fold(
+                                onSuccess = { count -> "OK:$count" },
+                                onFailure = { "FAIL:${it.message}" },
+                            )
                             testing = false
                         }
                     },
-                ) { Text(if (testing) "Testing…" else "Test connection") }
-                testResult?.let {
-                    Text(it, style = MaterialTheme.typography.bodySmall)
+                ) { Text(if (testing) stringResource(R.string.providers_testing) else stringResource(R.string.providers_test)) }
+                testResult?.let { result ->
+                    val message = when {
+                        result.startsWith("OK:") -> stringResource(R.string.providers_test_ok, result.removePrefix("OK:").toIntOrNull() ?: 0)
+                        result.startsWith("FAIL:") -> stringResource(R.string.providers_test_fail, result.removePrefix("FAIL:"))
+                        else -> result
+                    }
+                    Text(message, style = MaterialTheme.typography.bodySmall)
                 }
             }
         },
         confirmButton = {
             TextButton(onClick = {
                 onSave(initial.copy(baseUrl = baseUrl.trim(), model = model.trim(), apiKey = apiKey.trim(), requiresKey = requiresKey))
-            }) { Text("Save") }
+            }) { Text(stringResource(R.string.action_save)) }
         },
-        dismissButton = { TextButton(onClick = onDismiss) { Text("Cancel") } },
+        dismissButton = { TextButton(onClick = onDismiss) { Text(stringResource(R.string.action_cancel)) } },
     )
 }

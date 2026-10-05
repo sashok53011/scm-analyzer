@@ -9,6 +9,8 @@ data class Assessment(
     val summary: String,
     val detail: String,
     val source: String,
+    /** Stable rule key (e.g. "hardcoded-secret") for localization; null for LLM results. */
+    val ruleKey: String? = null,
 )
 
 internal data class Rule(
@@ -110,6 +112,7 @@ object StaticRules {
                 summary = "Blank line(s) — no code to assess.",
                 detail = "These lines carry no executable content; they are listed to keep line coverage complete.",
                 source = "static:blank",
+                ruleKey = "blank",
             )
         }
         val code = element.code
@@ -120,6 +123,7 @@ object StaticRules {
                     summary = rule.summary,
                     detail = rule.detail,
                     source = "static:${rule.name}",
+                    ruleKey = rule.name,
                 )
             }
         }
@@ -128,6 +132,7 @@ object StaticRules {
             summary = "No issues detected by static rules.",
             detail = "No known anti-pattern matched in this snippet. Enable LLM review for a deeper semantic assessment.",
             source = "static:clean",
+            ruleKey = "clean",
         )
     }
 }

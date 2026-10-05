@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SCM Analyzer</string>
+
+    <!-- Common -->
+    <string name="cd_providers">Anbieter</string>
+    <string name="cd_language">Sprache</string>
+    <string name="cd_back">Zurück</string>
+    <string name="cd_share">Teilen</string>
+    <string name="cd_open_browser">Im Browser öffnen</string>
+    <string name="cd_edit">Bearbeiten</string>
+    <string name="cd_duplicate">Duplizieren</string>
+    <string name="cd_delete">Löschen</string>
+    <string name="action_cancel">Abbrechen</string>
+    <string name="action_save">Speichern</string>
+    <string name="action_add">Hinzufügen</string>
+    <string name="action_reset">Zurücksetzen</string>
+    <string name="action_change">Ändern</string>
+
+    <!-- Language -->
+    <string name="language_title">Sprache</string>
+    <string name="language_system">Systemstandard</string>
+
+    <!-- Home -->
+    <string name="home_hero_title">Jede Codebasis verstehen</string>
+    <string name="home_hero_body">Rekursive Repository-Analyse mit interaktivem, einklappbarem HTML-Bericht und Multi-LLM-Sicherheitsprüfung.</string>
+    <string name="home_get_started">Loslegen</string>
+    <string name="home_open_local_title">Lokales Repository öffnen</string>
+    <string name="home_open_local_sub">Wählen Sie einen Ordner auf dem Gerät und analysieren Sie ihn direkt.</string>
+    <string name="home_clone_title">Von GitHub klonen</string>
+    <string name="home_clone_sub">Ein öffentliches Repository herunterladen und den Arbeitsbaum analysieren.</string>
+    <string name="home_sample_title">Mitgeliefertes Beispiel laden</string>
+    <string name="home_sample_sub">Testen Sie die komplette Pipeline sofort an einem kleinen mehrsprachigen Repository.</string>
+    <string name="home_working">Arbeite…</string>
+    <string name="home_error_title">Etwas ist schiefgelaufen</string>
+    <string name="home_active_provider">Aktiver Anbieter</string>
+    <string name="home_pipeline">Analyse-Pipeline</string>
+    <string name="home_step_ingest_title">Aufnahme</string>
+    <string name="home_step_ingest_body">Lokaler Ordner (SAF) oder GitHub-Download mit intelligenter Binär-/Vendor-Filterung.</string>
+    <string name="home_step_parse_title">Parsen</string>
+    <string name="home_step_parse_body">Regex-/heuristische Extraktoren für Kotlin, Java, JS/TS, Python, C/C++, Go, Rust, C#, PHP, Ruby, Shell und Markup.</string>
+    <string name="home_step_map_title">Zuordnen</string>
+    <string name="home_step_map_body">Jede Zeile echten Codes wird einer Berichtzeile zugeordnet; die Abdeckung wird als N/N angezeigt.</string>
+    <string name="home_step_assess_title">Bewerten</string>
+    <string name="home_step_assess_body">Lokale statische Regeln plus optionale LLM-Prüfung: Warnung, Schwachstelle, bestanden.</string>
+    <string name="home_step_report_title">Bericht</string>
+    <string name="home_step_report_body">Eigenständiges interaktives HTML mit 4 Spalten, Suche, Filtern und Dunkelmodus.</string>
+    <string name="home_build">Build %1$s</string>
+    <string name="home_device">%1$s %2$s · Android %3$s (API %4$d)</string>
+    <string name="clone_dialog_title">Von GitHub klonen</string>
+    <string name="clone_dialog_hint">Geben Sie eine öffentliche Repository-URL oder owner/repo ein.</string>
+    <string name="clone_field">Repository</string>
+    <string name="clone_placeholder">owner/repo oder https://github.com/owner/repo</string>
+    <string name="clone_action">Klonen</string>
+
+    <!-- Analyze -->
+    <string name="analyze_title">Analysieren</string>
+    <string name="analyze_no_repo">Kein Repository ausgewählt.</string>
+    <string name="analyze_repo_meta">%1$s · %2$d Dateien · %3$s MB</string>
+    <string name="analyze_options">Optionen</string>
+    <string name="analyze_llm_review">LLM-Prüfung</string>
+    <string name="analyze_provider_line">Anbieter: %1$s · %2$s</string>
+    <string name="analyze_provider_missing">Anbieter nicht konfiguriert (API-Schlüssel fehlt). Konfigurieren Sie ihn im Anbieter-Bildschirm.</string>
+    <string name="analyze_max_files">Max. Dateien: %1$d</string>
+    <string name="analyze_llm_budget">LLM-Elementbudget: %1$d</string>
+    <string name="analyze_run">Analyse starten</string>
+    <string name="analyze_express">Express-Bericht · alle Anbieter (%1$d)</string>
+    <string name="analyze_express_desc">Express führt denselben Code nacheinander durch alle konfigurierten, nutzbaren Anbieter und führt alle Urteile zu einem Konsens-Superbericht zusammen.</string>
+    <string name="analyze_running">Läuft…</string>
+    <string name="analyze_done_title">Analyse abgeschlossen</string>
+    <string name="analyze_done_meta">%1$d Elemente · %2$d/%3$d Dateien · Code-Abdeckung %4$s%%</string>
+    <string name="analyze_done_verdicts">Schwachstellen: %1$d · Warnungen: %2$d · Bestanden: %3$d</string>
+    <string name="analyze_view_report">Interaktiven Bericht öffnen</string>
+    <string name="analyze_failed">Fehlgeschlagen</string>
+    <string name="analyze_express_done_title">Express-Bericht fertig</string>
+    <string name="analyze_express_done_meta">%1$d Modellbericht(e) + Superbericht · %2$d Elemente</string>
+    <string name="analyze_express_done_verdicts">Schwachstellen: %1$d · Warnungen: %2$d</string>
+    <string name="analyze_view_super">Superbericht öffnen</string>
+    <string name="analyze_log">Protokoll</string>
+
+    <!-- Providers -->
+    <string name="providers_title">LLM-Anbieter</string>
+    <string name="providers_intro">Wählen Sie den Anbieter für die LLM-Prüfung. API-Schlüssel werden verschlüsselt auf dem Gerät gespeichert.</string>
+    <string name="providers_api_key_missing">API-Schlüssel: fehlt</string>
+    <string name="providers_api_key_set">API-Schlüssel: gesetzt</string>
+    <string name="providers_no_key">Kein API-Schlüssel nötig</string>
+    <string name="providers_requires_key">API-Schlüssel erforderlich</string>
+    <string name="field_base_url">Basis-URL</string>
+    <string name="field_model">Modell</string>
+    <string name="field_api_key">API-Schlüssel</string>
+    <string name="providers_test">Verbindung testen</string>
+    <string name="providers_testing">Teste…</string>
+    <string name="providers_test_ok">OK · %1$d Modelle verfügbar</string>
+    <string name="providers_test_fail">Fehlgeschlagen: %1$s</string>
+    <string name="provider_copy_suffix">%1$s (Kopie)</string>
+    <string name="provider_default_custom_label">Eigener Anbieter</string>
+    <string name="provider_default_custom_note">OpenAI-kompatibler Endpunkt.</string>
+    <string name="provider_note_devhorizon">OpenAI-kompatibel, kein API-Schlüssel nötig.</string>
+    <string name="provider_note_ollama">API-Schlüssel oder OAuth über `ollama signin`.</string>
+    <string name="provider_note_zen">Standard-Gratismodell; API-Schlüssel von OpenCode Zen.</string>
+    <string name="provider_note_go">Eigene Modellwahl; API-Schlüssel erforderlich.</string>
+
+    <!-- Report screen -->
+    <string name="report_title">Bericht</string>
+    <string name="report_none_title">Noch kein Bericht.</string>
+    <string name="report_none_body">Starten Sie eine Analyse, um den interaktiven HTML-Bericht zu erzeugen.</string>
+    <string name="report_tab_default">Bericht</string>
+    <string name="report_tab_super">Superbericht</string>
+
+    <!-- Errors / status shown in UI -->
+    <string name="err_clone_failed">Klonen fehlgeschlagen: %1$s</string>
+    <string name="err_folder_failed">Ordner kann nicht geöffnet werden: %1$s</string>
+    <string name="err_sample_failed">Beispiel konnte nicht geladen werden: %1$s</string>
+    <string name="err_provider_not_configured">Anbieter \'%1$s\' ist nicht konfiguriert (Schlüssel oder URL fehlt).</string>
+    <string name="err_no_providers">Keine nutzbaren Anbieter. Konfigurieren Sie mindestens einen im Anbieter-Bildschirm.</string>
+
+    <!-- Report: builder labels -->
+    <string name="rep_llm_off">LLM-Prüfung: aus (nur statische Regeln)</string>
+    <string name="rep_llm_on">LLM: %1$s / %2$s (%3$d geprüft)</string>
+    <string name="rep_llm_ensemble">Ensemble (%1$d Modelle)</string>
+    <string name="rep_stat_files">Dateien</string>
+    <string name="rep_stat_languages">Sprachen</string>
+    <string name="rep_stat_elements">Elemente</string>
+    <string name="rep_stat_code_lines">Codezeilen</string>
+    <string name="rep_stat_vulnerabilities">Schwachstellen</string>
+    <string name="rep_stat_warnings">Warnungen</string>
+    <string name="rep_stat_passed">Bestanden</string>
+    <string name="rep_stat_models">Modelle</string>
+    <string name="rep_stat_agreed">Einig</string>
+    <string name="rep_stat_disputed">Umstritten</string>
+    <string name="rep_coverage_code">Abdeckung echten Codes (ausführbare Zeilen zugeordnet)</string>
+    <string name="rep_coverage_symbol">Symbolabdeckung (Zeilen innerhalb erkannter Symbole)</string>
+    <string name="rep_footer_files">%1$d/%2$d Dateien analysiert</string>
+    <string name="rep_footer_no_warnings">keine Warnungen</string>
+    <string name="rep_footer_warnings">%1$d Warnungen</string>
+    <string name="rep_generated_by">Erzeugt von SCM Analyzer</string>
+    <string name="rep_static_rules">Statische Regeln</string>
+    <string name="rep_not_assessed">von diesem Modell nicht bewertet</string>
+    <string name="consensus_none">Von keinem Modell bewertet.</string>
+    <string name="consensus_agree">Alle %1$d Modelle sind sich einig: %2$s.</string>
+    <string name="consensus_disagree">Modelle widersprechen sich (%1$s) — eskaliert zu %2$s.</string>
+
+    <!-- Report template chrome -->
+    <string name="t_report_subtitle">Bericht</string>
+    <string name="t_super_subtitle">Superbericht</string>
+    <string name="t_search">Code, Namen, Dateien suchen…</string>
+    <string name="t_all_kinds">Alle Typen</string>
+    <string name="t_all_verdicts">Alle Urteile</string>
+    <string name="t_hide_blank">Leere ausblenden</string>
+    <string name="t_disputed_only">Nur umstrittene</string>
+    <string name="t_expand_all">Alle ausklappen</string>
+    <string name="t_collapse_all">Alle einklappen</string>
+    <string name="t_badge_vuln">Schwachstelle</string>
+    <string name="t_badge_warn">Warnung</string>
+    <string name="t_badge_pass">Bestanden</string>
+    <string name="t_badge_info">Info</string>
+    <string name="t_col_name">Name / Beschreibung</string>
+    <string name="t_col_category">Kategorie / Technologie / Typ</string>
+    <string name="t_col_code">Exakter Code &amp; Zeilenverweis</string>
+    <string name="t_col_quality">Codequalität &amp; Sicherheit</string>
+    <string name="t_col_consensus">Konsens / Qualität</string>
+    <string name="t_model_verdicts">Modellurteile (%1$d)</string>
+    <string name="t_legend_pass">Best Practice</string>
+    <string name="t_legend_warn">Problem / Warnung</string>
+    <string name="t_legend_vuln">Schwachstelle</string>
+    <string name="t_legend_info">Info</string>
+    <string name="t_tip">Tipp: Jeder Block, der breiter als ¼ des Bildschirms ist, wird automatisch eingeklappt — zum Erweitern tippen.</string>
+    <string name="t_disputed_badge">umstritten</string>
+    <string name="t_rows_counter">%1$d / %2$d Zeilen</string>
+    <string name="t_rows_word">Zeilen</string>
+
+    <!-- Kinds -->
+    <string name="kind_file">Datei</string>
+    <string name="kind_class">Klasse</string>
+    <string name="kind_interface">Interface</string>
+    <string name="kind_enum">Enum</string>
+    <string name="kind_object">Objekt</string>
+    <string name="kind_function">Funktion</string>
+    <string name="kind_method">Methode</string>
+    <string name="kind_ui_component">UI-Komponente</string>
+    <string name="kind_trigger">Ereignis-Trigger</string>
+    <string name="kind_variable">Variable</string>
+    <string name="kind_constant">Konstante</string>
+    <string name="kind_ui_element">UI-Element</string>
+    <string name="kind_style">Stilregel</string>
+    <string name="kind_config">Konfigurationsschlüssel</string>
+    <string name="kind_selector">Selektor</string>
+    <string name="kind_import">Importe</string>
+    <string name="kind_comment">Kommentar</string>
+    <string name="kind_code_block">Codeblock</string>
+    <string name="kind_blank">Leerzeilen</string>
+
+    <!-- Layers -->
+    <string name="layer_presentation">Präsentation</string>
+    <string name="layer_domain">Domäne</string>
+    <string name="layer_data">Daten</string>
+    <string name="layer_network">Netzwerk</string>
+    <string name="layer_api">API</string>
+    <string name="layer_service">Service</string>
+    <string name="layer_routing">Routing</string>
+    <string name="layer_configuration">Konfiguration</string>
+    <string name="layer_utility">Hilfsfunktionen</string>
+    <string name="layer_test">Test</string>
+    <string name="layer_core">Kern</string>
+
+    <!-- Patterns -->
+    <string name="pattern_factory">Fabrikmuster</string>
+    <string name="pattern_builder">Buildermuster</string>
+    <string name="pattern_singleton">Singleton</string>
+    <string name="pattern_repository">Repository-Muster</string>
+    <string name="pattern_controller">MVC-Controller</string>
+    <string name="pattern_service">Service-Schicht</string>
+    <string name="pattern_adapter">Adapter-Muster</string>
+    <string name="pattern_observer">Beobachter-Muster</string>
+    <string name="pattern_strategy">Strategiemuster</string>
+    <string name="pattern_decorator">Dekorierer-Muster</string>
+    <string name="pattern_facade">Fassadenmuster</string>
+    <string name="pattern_proxy">Proxy-Muster</string>
+    <string name="pattern_viewmodel">MVVM-ViewModel</string>
+    <string name="pattern_presenter">MVP-Presenter</string>
+    <string name="pattern_handler">Handler</string>
+    <string name="pattern_listener">Listener / Callback</string>
+    <string name="pattern_manager">Manager / Orchestrator</string>
+    <string name="pattern_provider">Provider</string>
+    <string name="pattern_mapper">Datenmapper</string>
+    <string name="pattern_dto">Datentransferobjekt</string>
+    <string name="pattern_exception">Fehlertyp</string>
+
+    <!-- Descriptions -->
+    <string name="describe_file">Quelldatei `%1$s`, rekursiv analysiert.</string>
+    <string name="describe_class">Klasse `%1$s` deklariert den unten stehenden Typ.</string>
+    <string name="describe_interface">Interface `%1$s` definiert einen andernorts implementierten Vertrag.</string>
+    <string name="describe_enum">Enum `%1$s` zählt eine feste Wertemenge auf.</string>
+    <string name="describe_object">Objekt/Singleton `%1$s` hält gemeinsamen Zustand oder Helfer.</string>
+    <string name="describe_function">Funktion `%1$s` — aufrufbare Routine. `%2$s`</string>
+    <string name="describe_method">Methode `%1$s`, definiert am umgebenden Typ. `%2$s`</string>
+    <string name="describe_component">UI-Komponente `%1$s` rendert einen Teil der Oberfläche. `%2$s`</string>
+    <string name="describe_trigger">Trigger `%1$s` reagiert auf ein Ereignis oder eine Route. `%2$s`</string>
+    <string name="describe_variable">Variable `%1$s` speichert veränderlichen Zustand. `%2$s`</string>
+    <string name="describe_constant">Konstante `%1$s` hält einen festen Wert. `%2$s`</string>
+    <string name="describe_tag">UI-Element `&lt;%1$s&gt;` im Markup.</string>
+    <string name="describe_style">Stilregel für Selektor `%1$s`.</string>
+    <string name="describe_config">Konfigurationsschlüssel `%1$s`.</string>
+    <string name="describe_selector">Selektor `%1$s`.</string>
+    <string name="describe_import">Import- / Abhängigkeitsdeklarationen.</string>
+    <string name="describe_comment">Kommentar- / Dokumentationsblock.</string>
+    <string name="describe_code_block">Zusammenhängender Codeblock ohne erkanntes Symbol.</string>
+    <string name="describe_blank">Leerzeilen.</string>
+    <string name="describe_custom">Element `%1$s` in `%2$s`.</string>
+
+    <!-- Static rules -->
+    <string name="rule_hardcoded_secret_summary">Möglicher fest codierter Zugangsschlüssel.</string>
+    <string name="rule_hardcoded_secret_detail">Ein geheimnisartiger Wert wird einer Variable oder Eigenschaft zugewiesen. In sicheren Speicher / Umgebung verschieben und rotieren.</string>
+    <string name="rule_sql_injection_summary">Mögliche SQL-Injection durch String-Verkettung.</string>
+    <string name="rule_sql_injection_detail">Ein SQL-Statement wird aus dynamischen Werten zusammengesetzt. Parametrisierte Abfragen / Prepared Statements verwenden.</string>
+    <string name="rule_command_injection_summary">Mögliche Command-Injection.</string>
+    <string name="rule_command_injection_detail">Ein Shell-/Systembefehl wird aus dynamischer Eingabe gebaut. Eingaben validieren und die Shell möglichst vermeiden.</string>
+    <string name="rule_code_eval_summary">Dynamischer Code / unsichere Deserialisierung.</string>
+    <string name="rule_code_eval_detail">Das Ausführen von Code oder Deserialisieren nicht vertrauenswürdiger Daten kann zu Remote-Code-Ausführung führen. Sichere Parser verwenden und eval vermeiden.</string>
+    <string name="rule_tls_disable_summary">TLS-Prüfung deaktiviert.</string>
+    <string name="rule_tls_disable_detail">Zertifikats- oder Hostnamenprüfung wird umgangen, was Man-in-the-Middle-Angriffe ermöglicht. Diese Überschreibung entfernen.</string>
+    <string name="rule_xss_summary">Potenzieller XSS-Sink.</string>
+    <string name="rule_xss_detail">Nicht vertrauenswürdige Daten im DOM können Skripte ausführen. Eingaben bereinigen oder sichere Text-APIs verwenden.</string>
+    <string name="rule_weak_crypto_summary">Schwacher Krypto-Algorithmus.</string>
+    <string name="rule_weak_crypto_detail">MD5/SHA-1/DES/RC4 sind für Sicherheitszwecke gebrochen. SHA-256+ und AES-GCM verwenden.</string>
+    <string name="rule_insecure_random_summary">Nicht-kryptografische Zufälligkeit.</string>
+    <string name="rule_insecure_random_detail">Zufallswerte für Tokens oder Sicherheitsentscheidungen sollten aus einer kryptografisch sicheren Quelle stammen.</string>
+    <string name="rule_cleartext_http_summary">Klartext-HTTP-Endpunkt.</string>
+    <string name="rule_cleartext_http_detail">Verkehr über http:// ist unverschlüsselt. Bevorzugen Sie https:// zum Schutz der Datenübertragung.</string>
+    <string name="rule_empty_catch_summary">Leerer catch-Block verschluckt Fehler.</string>
+    <string name="rule_empty_catch_detail">Ausnahmen stillschweigend zu ignorieren verbirgt Fehler. Fehler explizit protokollieren oder behandeln.</string>
+    <string name="rule_todo_marker_summary">Ungeklärter TODO/FIXME.</string>
+    <string name="rule_todo_marker_detail">Marker für offene Arbeit gefunden; prüfen, ob er unvollständiges oder unsicheres Verhalten darstellt.</string>
+    <string name="rule_debug_output_summary">Debug-Ausgabe im Code.</string>
+    <string name="rule_debug_output_detail">Übrig gebliebenes Debug-Logging kann Informationen preisgeben oder die Performance in Produktion beeinträchtigen.</string>
+    <string name="rule_insecure_cors_summary">Permissive CORS-Richtlinie.</string>
+    <string name="rule_insecure_cors_detail">Eine Wildcard-CORS-Origin erlaubt jeder Seite, Antworten zu lesen. Auf vertrauenswürdige Ursprünge beschränken.</string>
+    <string name="rule_clean_summary">Von statischen Regeln wurden keine Probleme gefunden.</string>
+    <string name="rule_clean_detail">In diesem Ausschnitt passte kein bekanntes Antimuster. Aktivieren Sie die LLM-Prüfung für eine tiefere semantische Bewertung.</string>
+    <string name="rule_blank_summary">Leerzeilen — nichts zu bewerten.</string>
+    <string name="rule_blank_detail">Diese Zeilen enthalten keinen ausführbaren Inhalt; sie sind nur zur vollständigen Abdeckung aufgeführt.</string>
+</resources>

@@ -42,6 +42,8 @@ HTML-Bericht mit Multi-LLM-Sicherheits- und Qualitätsbewertung erzeugt.
   - Urteil-Badges: ✅ best practice · ⚠️ Warnung · 🛡️ Schwachstelle · ℹ️ Info.
   - Sofortsuche, Filter nach Typ/Urteil, Hell-/Dunkelmodus, „alles aus-/einklappen".
   - Export, Teilen oder im Browser öffnen.
+- **Lokalisierte Oberfläche** in Englisch, Russisch und Deutsch mit Sprachumschalter in der App;
+  HTML-Bericht und LLM-Urteile folgen der gewählten Sprache.
 
 ## Wie es funktioniert
 

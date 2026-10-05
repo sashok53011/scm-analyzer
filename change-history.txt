@@ -4,6 +4,24 @@
 
 Format: date | version | change
 --------------------------------------------------------------------------------
+2026-10-05  v0.2.0  Localization (EN/RU/DE), docs filtering, ensemble reports
+- Full interface localization: extracted every user-facing string into resources;
+  added values-ru and values-de; English remains the base language.
+- In-app language switcher (System default / English / Русский / Deutsch) using
+  per-app locales (AppCompatDelegate.setApplicationLocales); added the AppCompat
+  dependency, MainActivity now extends AppCompatActivity (AppCompat theme), and
+  res/xml/locales_config.xml + android:localeConfig integrate with the system
+  "App language" settings on Android 13+.
+- Localized the generated HTML reports: column titles, filters, legend, statistics,
+  coverage labels, kind/layer/pattern labels, element descriptions and all static-rule
+  verdicts are translated at render time (templates now use {{t.*}} placeholders).
+- The LLM is instructed to answer in the selected language, so column 4 is localized.
+- Rule: ignore documentation and comments — only real executable code is analyzed
+  (README, *.md/*.txt/*.rst, comment-only ranges).
+- Rule: express report (ensemble) — run the same code through every configured provider
+  and merge verdicts into a consensus super-report.
+- Providers: add, duplicate and delete custom OpenAI-compatible providers.
+
 2026-10-05  v0.1.0  Initial release (development build)
 
 [P0] Project scaffold
