@@ -1,0 +1,83 @@
+================================================================================
+ SCM Analyzer — Change History / История изменений / Änderungsverlauf
+================================================================================
+
+Format: date | version | change
+--------------------------------------------------------------------------------
+2026-10-05  v0.1.0  Initial release (development build)
+
+[P0] Project scaffold
+- New Android app "SCM Analyzer" (package online.devhorizon.scm).
+- Gradle 9.3.1 + AGP 9.1.1 with built-in Kotlin 2.2.10 (standalone kotlin-android
+  plugin removed; Compose compiler / serialization plugins kept).
+- compileSdk/targetSdk 37 (Android SDK Platform 37 installed), minSdk 26.
+- Jetpack Compose Material 3, Navigation, Coroutines, kotlinx.serialization, OkHttp,
+  DocumentFile, security-crypto. Version catalog in gradle/libs.versions.toml.
+- First debug APK built and installed on a Redmi Note 9 Pro (Android 13).
+
+[P1] Repository input
+- RepoSource abstraction: FileRepoSource (filesystem), SafFolderSource (SAF tree),
+  CachedRepoSource (already enumerated entries).
+- GitHubRepo: public GitHub zipball download + safe zip extraction (zip-slip guard),
+  tolerant URL parser (owner/repo, https, git@, any case).
+- RepoFilter: vendor/binary/minified filtering, size caps, smart skip lists.
+- LanguageDetector: extension + shebang based language detection for ~10 language
+  families plus markup/config formats.
+
+[P2] Parsing and line coverage
+- BraceAnalyzer (Kotlin/Java/JS/TS/C-family/Go/Rust/PHP/Swift/Dart) with brace-range
+  detection and method promotion.
+- PythonAnalyzer (indentation based) and MarkupAnalyzer (HTML/XML/CSS/JSON/YAML/
+  INI/TOML/Markdown/SQL/Dockerfile/Makefile/Protobuf/Terraform).
+- CodeIndexer: builds report rows for symbols, then guarantees a row for every
+  remaining code line via deterministic bucketing; produces coverage metrics.
+
+[P3] Assessment and LLM providers
+- StaticRules: 14 offline quality/security rules (hardcoded secrets, SQL and command
+  injection, eval/deserialization, disabled TLS, XSS sinks, weak crypto, insecure RNG,
+  cleartext HTTP, empty catch, TODO, debug output, insecure CORS).
+- ProviderConfig with 4 presets: DevHorizon, Ollama Cloud, OpenCode Zen, OpenCode Go.
+- OpenAiCompatClient: chat completions + model listing for any OpenAI-compatible API.
+- LlmAssessor: token-budgeted batching, JSON verdict parsing, retry-safe per batch.
+- AssessmentCache: content-hash cache so reruns and provider switches reuse results.
+- ProviderStore: encrypted shared preferences (Android Keystore) for API keys.
+
+[P4] Interactive HTML report
+- HtmlReportBuilder + assets/report_template.html.
+- Four columns (name/description, category/tech/type, exact code & line reference,
+  quality & security); collapsible rows; content wider than 25% of the viewport
+  auto-collapses; search, kind/verdict filters, dark/light theme, expand/collapse all.
+- ReportScreen renders the report in a WebView; export/share/open in browser via
+  FileProvider (res/xml/file_paths.xml).
+
+[P5] Polish and requested rules
+- Bundled sample repository (assets/sample_repo) for instant end-to-end testing.
+- Rule: ignore documentation and comments — only real executable code is analyzed.
+  Added RepoFilter.isDocumentation() (README, LICENSE, CHANGELOG, *.md/.txt/.rst/.adoc)
+  and RepoFilter.isCommentLine(); CodeIndexer now counts "real code" only and no longer
+  emits blank/comment rows. Coverage denominator switched to code lines.
+- Rule: express report (ensemble) — ExpressPipeline runs the same index through every
+  configured provider, writes one report per model, and Consensus compares verdicts into
+  a super-report (report/super_report_template.html): majority vote, escalation to the
+  most severe verdict on disagreement, "disputed" flag and filter.
+- Providers: add, duplicate, delete custom OpenAI-compatible providers (built-ins are
+  editable but protected from deletion).
+- Fixed report coverage labels (used total lines instead of code lines).
+- Disabled auto-capitalization on URL/model input fields.
+
+[Repo]
+- Initialized git repository and pushed to GitHub:
+  https://github.com/sashok53011/scm-analyzer
+- Added .gitignore and .gitattributes (LF for code, CRLF for .bat, binaries marked).
+
+--------------------------------------------------------------------------------
+Known limitations
+- Heuristic parsers approximate symbol extraction (not full AST parsers).
+- LLM review needs network access and is bounded by a per-run element budget.
+- Private GitHub repositories are not supported (public zipball only).
+
+Planned
+- Optional syntax highlighting and a folder-tree overview in the report.
+- Report history screen and PDF/e-mail export.
+- Optional git history support (JGit) for change-focused analysis.
+================================================================================
