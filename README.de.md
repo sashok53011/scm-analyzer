@@ -2,6 +2,12 @@
 
 **Sprachen:** [English](README.md) · [Русский](README.ru.md) · **Deutsch**
 
+[![Android CI](https://github.com/sashok53011/scm-analyzer/actions/workflows/android.yml/badge.svg)](https://github.com/sashok53011/scm-analyzer/actions/workflows/android.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+![Platform](https://img.shields.io/badge/platform-Android-3DDC84)
+![minSdk](https://img.shields.io/badge/minSdk-26-blue)
+![Kotlin](https://img.shields.io/badge/Kotlin-2.2.10-7F52FF)
+
 Eine Android-App, die lokale oder von GitHub geklonte Repositories analysiert, ein tiefes
 architektonisches Verständnis der Codebasis aufbaut und einen interaktiven, einklappbaren
 HTML-Bericht mit Multi-LLM-Sicherheits- und Qualitätsbewertung erzeugt.
@@ -107,4 +113,4 @@ Siehe [change-history.txt](change-history.txt).
 
 ## Lizenz
 
-Es ist noch keine Lizenzdatei enthalten. Fügen Sie eine hinzu, bevor Sie das Projekt verbreiten.
+Veröffentlicht unter der [MIT-Lizenz](LICENSE).

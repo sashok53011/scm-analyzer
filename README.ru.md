@@ -2,6 +2,12 @@
 
 **Языки:** [English](README.md) · **Русский** · [Deutsch](README.de.md)
 
+[![Android CI](https://github.com/sashok53011/scm-analyzer/actions/workflows/android.yml/badge.svg)](https://github.com/sashok53011/scm-analyzer/actions/workflows/android.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+![Platform](https://img.shields.io/badge/platform-Android-3DDC84)
+![minSdk](https://img.shields.io/badge/minSdk-26-blue)
+![Kotlin](https://img.shields.io/badge/Kotlin-2.2.10-7F52FF)
+
 Android-приложение, которое анализирует локальные или склонированные с GitHub репозитории,
 строит глубокое архитектурное понимание кодовой базы и формирует интерактивный сворачиваемый
 HTML-отчёт с мульти-LLM оценкой качества и безопасности.
@@ -106,4 +112,4 @@ app/src/main/assets/  report_template.html, super_report_template.html, sample_r
 
 ## Лицензия
 
-Файл лицензии пока не добавлен. Добавьте его перед распространением.
+Проект распространяется под [лицензией MIT](LICENSE).
