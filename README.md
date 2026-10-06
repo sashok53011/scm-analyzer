@@ -28,7 +28,6 @@ multi-LLM security and quality review.
 - **Multi-LLM review** with four built-in providers and unlimited custom OpenAI-compatible ones:
   | Provider | Base URL | Notes |
   |---|---|---|
-  | DevHorizon (primary) | `https://llm.devhorizon.online/v1` | No API key required |
   | Ollama Cloud | `https://ollama.com/v1` | API key / OAuth |
   | OpenCode Zen | `https://opencode.ai/zen/v1` | Default free model |
   | OpenCode Go | `https://opencode.ai/zen/go/v1` | Custom model |
