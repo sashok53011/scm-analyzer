@@ -28,7 +28,6 @@ HTML-отчёт с мульти-LLM оценкой качества и безо�
 - **Мульти-LLM проверка**: четыре встроенных провайдера и любые свои OpenAI-совместимые:
   | Провайдер | Base URL | Примечание |
   |---|---|---|
-  | DevHorizon (основной) | `https://llm.devhorizon.online/v1` | API-ключ не нужен |
   | Ollama Cloud | `https://ollama.com/v1` | API-ключ / OAuth |
   | OpenCode Zen | `https://opencode.ai/zen/v1` | Бесплатная модель по умолчанию |
   | OpenCode Go | `https://opencode.ai/zen/go/v1` | Своя модель |
