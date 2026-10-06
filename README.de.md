@@ -29,7 +29,6 @@ HTML-Bericht mit Multi-LLM-Sicherheits- und Qualitätsbewertung erzeugt.
   OpenAI-kompatiblen:
   | Anbieter | Basis-URL | Hinweis |
   |---|---|---|
-  | DevHorizon (primär) | `https://llm.devhorizon.online/v1` | Kein API-Schlüssel nötig |
   | Ollama Cloud | `https://ollama.com/v1` | API-Schlüssel / OAuth |
   | OpenCode Zen | `https://opencode.ai/zen/v1` | Standard-Gratismodell |
   | OpenCode Go | `https://opencode.ai/zen/go/v1` | Eigenes Modell |
