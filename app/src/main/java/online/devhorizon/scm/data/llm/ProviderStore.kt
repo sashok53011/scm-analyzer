@@ -30,7 +30,9 @@ class ProviderStore(context: Context) {
 
     fun loadProviders(): List<ProviderConfig> {
         val raw = prefs.getString(KEY_PROVIDERS, null) ?: return Providers.defaults
-        val stored = runCatching { json.decodeFromString<List<ProviderConfig>>(raw) }.getOrDefault(emptyList())
+        val stored = runCatching { json.decodeFromString<List<ProviderConfig>>(raw) }
+            .getOrDefault(emptyList())
+            .filterNot { it.id == LEGACY_DEVHORIZON }
         // Merge defaults so new built-in providers always appear.
         val byId = stored.associateBy { it.id }
         return Providers.defaults.map { def ->
@@ -42,7 +44,10 @@ class ProviderStore(context: Context) {
         prefs.edit().putString(KEY_PROVIDERS, json.encodeToString(list)).apply()
     }
 
-    fun loadSelectedId(): String = prefs.getString(KEY_SELECTED, Providers.DEVHORIZON) ?: Providers.DEVHORIZON
+    fun loadSelectedId(): String {
+        val id = prefs.getString(KEY_SELECTED, Providers.CUSTOM) ?: Providers.CUSTOM
+        return if (id == LEGACY_DEVHORIZON) Providers.CUSTOM else id
+    }
 
     fun saveSelectedId(id: String) {
         prefs.edit().putString(KEY_SELECTED, id).apply()
@@ -51,5 +56,8 @@ class ProviderStore(context: Context) {
     private companion object {
         const val KEY_PROVIDERS = "providers_json"
         const val KEY_SELECTED = "selected_provider"
+
+        /** Removed built-in preset; dropped from persisted configs on load. */
+        const val LEGACY_DEVHORIZON = "devhorizon"
     }
 }

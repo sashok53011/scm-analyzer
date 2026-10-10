@@ -4,6 +4,15 @@
 
 Format: date | version | change
 --------------------------------------------------------------------------------
+2026-10-05  v0.2.1  Providers: replace DevHorizon preset with a custom endpoint
+- Removed the built-in "DevHorizon (primary)" provider (llm.devhorizon.online).
+- Added a built-in "Custom (OpenAI-compatible)" preset with empty Base URL, Model
+  and API key fields, ready to point at any endpoint; it is the default selection.
+- Legacy "devhorizon" configs and the saved selection are migrated to the custom
+  preset on load, so the removed provider no longer appears.
+- Every provider (built-in and custom) keeps the "Test connection" action that
+  lists the models exposed by the endpoint.
+
 2026-10-05  v0.2.0  Localization (EN/RU/DE), docs filtering, ensemble reports
 - Full interface localization: extracted every user-facing string into resources;
   added values-ru and values-de; English remains the base language.

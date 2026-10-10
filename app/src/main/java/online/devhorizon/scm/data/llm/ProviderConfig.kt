@@ -19,19 +19,20 @@ data class ProviderConfig(
 
 object Providers {
 
-    const val DEVHORIZON = "devhorizon"
+    const val CUSTOM = "custom"
     const val OLLAMA_CLOUD = "ollama-cloud"
     const val OPENCODE_ZEN = "opencode-zen"
     const val OPENCODE_GO = "opencode-go"
 
     val defaults: List<ProviderConfig> = listOf(
         ProviderConfig(
-            id = DEVHORIZON,
-            label = "DevHorizon (primary)",
-            baseUrl = "https://llm.devhorizon.online/v1",
-            model = "gemma4-12b-qat-uncensored-hauhaucs-balanced",
-            requiresKey = false,
-            notes = "OpenAI-compatible, no API key required.",
+            id = CUSTOM,
+            label = "Custom provider",
+            baseUrl = "",
+            model = "",
+            apiKey = "",
+            requiresKey = true,
+            notes = "OpenAI-compatible endpoint.",
         ),
         ProviderConfig(
             id = OLLAMA_CLOUD,
@@ -62,7 +63,7 @@ object Providers {
     fun find(list: List<ProviderConfig>, id: String): ProviderConfig =
         list.firstOrNull { it.id == id } ?: list.first()
 
-    /** True for the four built-in presets (they can be edited but not deleted). */
+    /** True for the built-in presets (they can be edited but not deleted). */
     fun isBuiltIn(id: String): Boolean = defaults.any { it.id == id }
 
     fun newCustomId(): String = "custom-" + System.currentTimeMillis()

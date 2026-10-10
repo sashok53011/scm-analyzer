@@ -166,7 +166,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
     fun resetProviders() {
         _providers.value = Providers.defaults
         store.saveProviders(Providers.defaults)
-        selectProvider(Providers.DEVHORIZON)
+        selectProvider(Providers.CUSTOM)
     }
 
     // ---- Repository input ----

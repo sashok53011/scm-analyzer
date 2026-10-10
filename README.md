@@ -25,9 +25,11 @@ multi-LLM security and quality review.
   PHP, Ruby, Shell, plus markup/config (HTML, CSS, XML, JSON, YAML, TOML, SQL, Dockerfile…).
 - **Only real, executable code is analyzed.** README/`*.md`/`*.txt`/`*.rst` and other docs are
   skipped; pure comment and blank line ranges are ignored.
-- **Multi-LLM review** with four built-in providers and unlimited custom OpenAI-compatible ones:
+- **Multi-LLM review** with three built-in providers plus a ready-made custom
+  OpenAI-compatible endpoint and unlimited added ones:
   | Provider | Base URL | Notes |
   |---|---|---|
+  | Custom (OpenAI-compatible) | *(you fill in)* | Bring your own URL / model / key |
   | Ollama Cloud | `https://ollama.com/v1` | API key / OAuth |
   | OpenCode Zen | `https://opencode.ai/zen/v1` | Default free model |
   | OpenCode Go | `https://opencode.ai/zen/go/v1` | Custom model |

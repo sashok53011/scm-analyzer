@@ -95,7 +95,6 @@
     <string name="provider_copy_suffix">%1$s (копия)</string>
     <string name="provider_default_custom_label">Свой провайдер</string>
     <string name="provider_default_custom_note">OpenAI-совместимый эндпоинт.</string>
-    <string name="provider_note_devhorizon">OpenAI-совместимый, API-ключ не требуется.</string>
     <string name="provider_note_ollama">API-ключ или OAuth через `ollama signin`.</string>
     <string name="provider_note_zen">Бесплатная модель по умолчанию; API-ключ OpenCode Zen.</string>
     <string name="provider_note_go">Выбор своей модели; требуется API-ключ.</string>

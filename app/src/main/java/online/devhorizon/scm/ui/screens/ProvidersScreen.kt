@@ -53,8 +53,14 @@ import online.devhorizon.scm.data.llm.Providers
 import online.devhorizon.scm.ui.MainViewModel
 
 @Composable
+private fun providerLabel(provider: ProviderConfig): String = when (provider.id) {
+    Providers.CUSTOM -> stringResource(R.string.provider_default_custom_label)
+    else -> provider.label
+}
+
+@Composable
 private fun providerNote(provider: ProviderConfig): String = when (provider.id) {
-    Providers.DEVHORIZON -> stringResource(R.string.provider_note_devhorizon)
+    Providers.CUSTOM -> stringResource(R.string.provider_default_custom_note)
     Providers.OLLAMA_CLOUD -> stringResource(R.string.provider_note_ollama)
     Providers.OPENCODE_ZEN -> stringResource(R.string.provider_note_zen)
     Providers.OPENCODE_GO -> stringResource(R.string.provider_note_go)
@@ -112,7 +118,7 @@ fun ProvidersScreen(vm: MainViewModel, onBack: () -> Unit) {
                         )
                         ListItem(
                             modifier = Modifier.weight(1f),
-                            headlineContent = { Text(provider.label, fontWeight = FontWeight.SemiBold) },
+                            headlineContent = { Text(providerLabel(provider), fontWeight = FontWeight.SemiBold) },
                             supportingContent = {
                                 Column {
                                     Text(provider.baseUrl, style = MaterialTheme.typography.bodySmall)
@@ -179,7 +185,7 @@ private fun ProviderEditDialog(
 
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text(initial.label) },
+        title = { Text(providerLabel(initial)) },
         text = {
             Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 OutlinedTextField(

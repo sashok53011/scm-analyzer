@@ -95,7 +95,6 @@
     <string name="provider_copy_suffix">%1$s (copy)</string>
     <string name="provider_default_custom_label">Custom provider</string>
     <string name="provider_default_custom_note">OpenAI-compatible endpoint.</string>
-    <string name="provider_note_devhorizon">OpenAI-compatible, no API key required.</string>
     <string name="provider_note_ollama">API key, or OAuth via `ollama signin`.</string>
     <string name="provider_note_zen">Default free model; API key from OpenCode Zen.</string>
     <string name="provider_note_go">Custom model selection; API key required.</string>

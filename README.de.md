@@ -25,10 +25,11 @@ HTML-Bericht mit Multi-LLM-Sicherheits- und Qualitätsbewertung erzeugt.
   Ruby, Shell sowie Markup/Konfiguration (HTML, CSS, XML, JSON, YAML, TOML, SQL, Dockerfile …).
 - **Nur echter, ausführbarer Code wird analysiert.** README/`*.md`/`*.txt`/`*.rst` und andere
   Dokumentation werden übersprungen; reine Kommentar- und Leerzeilenbereiche werden ignoriert.
-- **Multi-LLM-Prüfung** mit vier eingebauten Anbietern und beliebig vielen eigenen
-  OpenAI-kompatiblen:
+- **Multi-LLM-Prüfung** mit drei eingebauten Anbietern plus einem fertigen eigenen
+  OpenAI-kompatiblen Endpunkt und beliebig vielen weiteren:
   | Anbieter | Basis-URL | Hinweis |
   |---|---|---|
+  | Custom (OpenAI-kompatibel) | *(selbst ausfüllen)* | Eigene URL / Modell / Schlüssel |
   | Ollama Cloud | `https://ollama.com/v1` | API-Schlüssel / OAuth |
   | OpenCode Zen | `https://opencode.ai/zen/v1` | Standard-Gratismodell |
   | OpenCode Go | `https://opencode.ai/zen/go/v1` | Eigenes Modell |
